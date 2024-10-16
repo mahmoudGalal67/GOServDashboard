@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/Sidebar";
 import HeaderComponent from "./component/HeaderComponent";
 import ProductHead from "./component/ProductHead";
 import ProductList from "./component/Products";
 import ProductListRow from "./component/ProductsListRow";
 import "./ProductPage.css";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
 // import Helper from "../../components/Helper";
 
 const ProductsPage = (props) => {
@@ -41,7 +41,7 @@ const ProductsPage = (props) => {
         }}
       >
         <div className="headerComponent">
-          <HeaderComponent />
+          <HeaderComponent label="المنتجات" />
           <ProductHead
             showProductList={showProductList}
             hideProductList={hideProductList}

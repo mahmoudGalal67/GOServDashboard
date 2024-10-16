@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import "./HeaderComponent.css";
-import HelpModal from "./modalsProduct/HelpModal";
+import React from "react";
 import { FaHome } from "react-icons/fa";
-import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import Helper from "../../../components/Helper";
+import "./HeaderComponent.css";
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ label }) => {
   return (
     <>
       <div className="header-container-prd">
         <div className="nav-items">
           <FaHome className="nav-icon" />
-          <span className="nav-item-home">الرئيسية</span>
-          <span className="nav-item">/ المنتجات</span>
+          <Link to="/" className="nav-item-home">الرئيسية</Link>
+          <span className="nav-item">/ {label}</span>
         </div>
         <div
-          className="help-class"  
+          className="help-class"
         >
           <Helper />
         </div>

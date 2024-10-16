@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-
+import googleplay from './../assets/googleplay.svg'
+import applestore from "./../assets/applestore.svg"
 import sbImg from "../assets/u1GwprK5yFRK0UsCdKzY2MWG8nJpRHhpNzG8h0c4.webp";
 import { HiOutlineHome } from "react-icons/hi";
 import { TbShirt } from "react-icons/tb";
-import { BsBox2 } from "react-icons/bs";
-import { GoPeople } from "react-icons/go";
+import { BsBox2, BsPersonLinesFill } from "react-icons/bs";
+import { GoBriefcase, GoPeople } from "react-icons/go";
 import { FiPieChart } from "react-icons/fi";
 import { TbMessageQuestion } from "react-icons/tb";
 import { LuNewspaper } from "react-icons/lu";
 import { TbSpeakerphone } from "react-icons/tb";
-import { CiShare2 } from "react-icons/ci";
+import { CiBullhorn, CiSettings, CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { LiaLandmarkSolid } from "react-icons/lia";
+import { IoExtensionPuzzleOutline, IoLibraryOutline, IoWalletOutline } from "react-icons/io5";
+import { MdOutlinePhoneAndroid } from "react-icons/md";
+import { VscExtensions } from "react-icons/vsc";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -135,7 +140,9 @@ const Sidebar = () => {
           {/* share icon */}
 
           <button
+            className="-translate-x-[13px]"
             style={{
+
               backgroundColor: "#baf3e6",
               height: "30.6px",
               padding: "4px 12px",
@@ -181,140 +188,176 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
+            <Link to="/feedback" className="sidebarLink ">
               <TbMessageQuestion />
               الأسئلة والتقييمات
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
+            <Link to="/profilepage" className="sidebarLink ">
               <LuNewspaper />
               الصفحات التعريفية
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
+            <Link to="/marketing" className="sidebarLink ">
               <TbSpeakerphone />
               الأدوات التسويقية
-            </a>
+            </Link>
           </li>
           {/* navigation headers */}
           <li className="mt-8 navHeader">
-            <a
-              href="#f"
+            <Link 
+              to=""
               style={{
                 color: "#1e90ff",
                 fontWeight: "600",
               }}
             >
               قنوات البيع
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
+            <Link to="/mahally" className="sidebarLink ">
               <i class="sicon-mahally"></i>
               محلي
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
+            <Link to="/sallapoint" className="sidebarLink ">
               <i class="sicon-pos"></i>
               سلة بوينت
-            </a>
+            </Link>
           </li>
           {/* ادوات مسانده */}
           <li className="mt-8 navHeader">
-            <a
-              href="#f"
+            <Link
+              to=""
               style={{
                 color: "#1e90ff",
                 fontWeight: "600",
               }}
             >
               ادوات مسانده
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              <TbSpeakerphone />
-              الأدوات التسويقية
-            </a>
+            <Link to="/experts" className="sidebarLink ">
+              <GoBriefcase />
+              خدمة التاجر
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              الأدوات التسويقية
-            </a>
+            <Link to="/influencers" className="sidebarLink ">
+              <BsPersonLinesFill />
+              المؤثرين
+            </Link>
+          </li>
+          <li>
+            <Link to="/sweply" className="sidebarLink ">
+              <CiBullhorn />
+              اعلانات سويبلي
+            </Link>
           </li>
           {/* اعدادات */}
           <li className="mt-8 navHeader">
-            <a
-              href="#f"
+            <Link
+              to=""
               style={{
                 color: "#1e90ff",
                 fontWeight: "600",
               }}
             >
-              قنوات البيع
-            </a>
+              الاعدادات
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              <TbSpeakerphone />
-              الأدوات التسويقية
-            </a>
+            <Link to="/marketplace" className="sidebarLink ">
+              <LiaLandmarkSolid />
+              باقة المتجر
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              الأدوات التسويقية
-            </a>
+            <Link to="/settings" className="sidebarLink ">
+              <CiSettings />
+              اعدادات المتجر
+            </Link>
+          </li>
+          <li>
+            <Link to="/wallet" className="sidebarLink ">
+              <IoWalletOutline />
+              المحفظة والفواتير
+            </Link>
           </li>
 
           {/* مظهر المنتج */}
           <li className="mt-8 navHeader">
-            <a
-              href="#f"
+            <Link
+              to=""
               style={{
                 color: "#1e90ff",
                 fontWeight: "600",
               }}
             >
-              قنوات البيع
-            </a>
+              مظهر المتجر
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              <TbSpeakerphone />
-              الأدوات التسويقية
-            </a>
+            <Link to="/marketplacethemes" className="sidebarLink ">
+              <IoLibraryOutline />
+              تصميم المتجر
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              الأدوات التسويقية
-            </a>
+            <Link to="/mobile-app" className="sidebarLink ">
+              <MdOutlinePhoneAndroid />
+              صانع التطبيقات
+            </Link>
           </li>
           {/* متجر التطبيقات */}
           <li className="mt-8 navHeader">
-            <a
-              href="#f"
+            <Link
+              to=""
               style={{
                 color: "#1e90ff",
                 fontWeight: "600",
               }}
             >
-              قنوات البيع
-            </a>
+              متجر التطبيقات
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              <TbSpeakerphone />
-              الأدوات التسويقية
-            </a>
+            <Link to="/apps" className="sidebarLink ">
+              <IoExtensionPuzzleOutline />
+              التطبيقات المثبتة
+            </Link>
           </li>
           <li>
-            <a href="#" className="sidebarLink ">
-              الأدوات التسويقية
-            </a>
+            <Link to="#" className="sidebarLink ">
+              <VscExtensions />
+              زيارة متجر التطبيقات
+            </Link>
           </li>
+          {/* تطبيق التاجر */}
+          <li className="mt-8 navHeader">
+            <Link
+              to=""
+              style={{
+                color: "#1e90ff",
+                fontWeight: "600",
+              }}
+            >
+              تطبيق التاجر
+            </Link>
+          </li>
+          <div className="flex flex-row items-center gap-2 justify-between px-2">
+            <Link to=''>
+              <img className="w-full" src={googleplay} alt="googleplay" />
+            </Link>
+            <Link to=''>
+              <img className="w-full" src={applestore} alt="applestore" />
+            </Link>
+          </div>
         </ul>
       </div>
     </div>
