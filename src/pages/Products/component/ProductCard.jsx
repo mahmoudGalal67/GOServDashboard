@@ -172,7 +172,7 @@ const ProductCard = ({ product, onDelete }) => {
                   </svg>
                 </div>
               </div>
-              <OptionsModal isColumn={true} />
+              <OptionsModal isColumn={true} product={product} />
             </div>
             <div className="field">
               <div className="selectClassificationClass">

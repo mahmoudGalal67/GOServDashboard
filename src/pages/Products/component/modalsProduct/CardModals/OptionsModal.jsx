@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../ProductCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "react-quill/dist/quill.snow.css";
 import "../../ProductsRow.css";
+import { ProductContext } from "../../../../../components/context/Product";
 
-const OptionsModal = ({ isColumn }) => {
+const OptionsModal = ({ isColumn, product }) => {
+  const { dispatch, products } = useContext(ProductContext);
+
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
   const handleOptionsModalClose = () => setShowOptionsModal(false);
@@ -67,6 +70,10 @@ const OptionsModal = ({ isColumn }) => {
       }
     });
     setOptionList(newoptions);
+    dispatch({
+      type: "updateProductOptions",
+      payload: { id: product.id, colors: newoptions },
+    });
   };
 
   const handleOptionChange = (e, index, name) => {

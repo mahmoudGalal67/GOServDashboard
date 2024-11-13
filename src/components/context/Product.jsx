@@ -50,6 +50,22 @@ const ProductReducer = (state, action) => {
           }),
         ],
       };
+    case "updateProductOptions":
+      return {
+        ...state,
+        products: [
+          ...state.products.map((product) => {
+            if (product.id == action.payload.id) {
+              return {
+                ...product,
+                color_photos: action.payload.colors,
+              };
+            } else {
+              return product;
+            }
+          }),
+        ],
+      };
     case "updateProduct":
       return {
         ...state,
