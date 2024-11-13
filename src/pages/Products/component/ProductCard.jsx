@@ -8,8 +8,11 @@ import OptionsModal from "./modalsProduct/CardModals/OptionsModal";
 import CategoryModal from "./modalsProduct/CardModals/CategoryModal";
 import DetailsModal from "./modalsProduct/CardModals/DetailsModal";
 import ProductNotificationModal from "./modalsProduct/CardModals/ProductNotificationModal";
-import axios from "axios";
 import { ProductContext } from "../../../components/context/Product";
+
+import arflag from "../../../assets/flag.png";
+import enflag from "../../../assets/united-kingdom.png";
+
 // function ToggleCheckButton() {
 //   const [isChecked, setIsChecked] = useState(false);
 
@@ -30,6 +33,7 @@ import { ProductContext } from "../../../components/context/Product";
 const ProductCard = ({ product, onDelete }) => {
   const { dispatch } = useContext(ProductContext);
 
+  const [lang, setLang] = useState("en");
   const [isRed, setIsRed] = useState(false);
   const handleColorClick = () => {
     setIsRed((prev) => !prev);
@@ -37,13 +41,13 @@ const ProductCard = ({ product, onDelete }) => {
 
   const handleProductSubmit = async () => {};
 
-  const changeProductState = (e, lang) => {
+  const changeProductState = (name, value, lang) => {
     dispatch({
       type: "updateProduct",
       payload: {
         id: product.id,
-        [e.target.name]: e.target.name,
-        value: e.target.value,
+        name: name,
+        value: value,
         lang,
       },
     });
@@ -54,7 +58,7 @@ const ProductCard = ({ product, onDelete }) => {
       <div className="product-container">
         <div className="product-card">
           <div className="product-image">
-            {/* <img
+            <img
               src={
                 !product.updated && product.form
                   ? product.firstPhoto
@@ -63,7 +67,7 @@ const ProductCard = ({ product, onDelete }) => {
                   : URL.createObjectURL(product.firstPhoto)
               }
               alt=""
-            /> */}
+            />
             <button className="upload-icon deleteCardButton" onClick={onDelete}>
               X
             </button>
@@ -97,14 +101,26 @@ const ProductCard = ({ product, onDelete }) => {
                     placeholder={product.type ? product.type.en : ""}
                     name="name"
                     value={product.name ? product.name.en : ""}
-                    onChange={(e) => changeProductState(e, true)}
+                    onChange={(e) =>
+                      changeProductState(e.target.name, e.target.value, true)
+                    }
                   />
                 </div>
               </div>
               <div className="select-wrapper">
-                <select name="language" className="language-select">
-                  <option value="AR">AR</option>
-                  <option value="EN">EN</option>
+                <select
+                  name="language"
+                  className="language-select"
+                  onChange={(e) => setLang(e.target.value)}
+                >
+                  <option selected={true} value="ar">
+                    AR <img src={arflag} style={{ width: "20px" }} alt="" />
+                  </option>
+                  <option value="en">
+                    {" "}
+                    <img src={enflag} alt="" style={{ width: "20px" }} />
+                    EN
+                  </option>
                 </select>
               </div>
             </div>
@@ -116,7 +132,9 @@ const ProductCard = ({ product, onDelete }) => {
                   placeholder="السعر"
                   name="price"
                   value={product.price}
-                  onChange={(e) => changeProductState(e, false)}
+                  onChange={(e) =>
+                    changeProductState("price", e.target.value, false)
+                  }
                 />
               </div>
               <div className="labelPriceClass">

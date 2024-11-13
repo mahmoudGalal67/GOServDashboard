@@ -93,7 +93,7 @@ const AddNewPhotoModal = ({ isColumn, product }) => {
             ></i>
           </div>
           <div className="uploaded-images-container d-flex">
-            {product.imgs?.map((image, index) => (
+            {product.photos?.map((image, index) => (
               <div key={index} className="uploaded-image">
                 <img
                   src={

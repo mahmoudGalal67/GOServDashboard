@@ -13,6 +13,7 @@ const AddNewProductModal = () => {
 
   const handleAddProduct = (placeholder) => {
     const newProductData = {
+      id: 0,
       firstPhoto:
         "https://cdn.assets.salla.network/prod/admin/cp/assets/images/placeholder.png",
       type: { en: placeholder },

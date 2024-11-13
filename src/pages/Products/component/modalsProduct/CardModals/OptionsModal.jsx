@@ -92,6 +92,8 @@ const OptionsModal = ({ isColumn }) => {
     }
   };
 
+  console.log(optionList);
+
   return (
     <>
       {isColumn ? (
