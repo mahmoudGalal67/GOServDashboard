@@ -41,7 +41,7 @@ const ProductCard = ({ product, onDelete }) => {
   };
 
   const handleProductSubmit = async () => {
-    let productData = { ...product };
+    let productData = JSON.parse(JSON.stringify(product));
 
     if (!productData.product_colors) {
       console.log("please add all fields");

@@ -12,8 +12,8 @@ export const dummyProducts = [
       en: "details",
       ar: "تفاصيل",
     },
-    category_id: "1",
-    brand_id: "1",
+    category: "1",
+    brand: "1",
     weight: "10",
     price: "500",
     photos: [
