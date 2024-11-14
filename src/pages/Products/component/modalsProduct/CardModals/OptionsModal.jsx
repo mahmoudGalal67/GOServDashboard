@@ -21,13 +21,13 @@ const OptionsModal = ({ isColumn, product }) => {
   };
 
   const optionListData = {
-    color: "",
-    value: "",
-    images: [],
-    sizes: {
-      text: "",
-      prices: "",
-      quantity: "",
+    name: "",
+    hex_code: "",
+    photos: [],
+    product_color_sizes: {
+      size: [],
+      price: [],
+      quantity: [],
     },
   };
 
@@ -35,12 +35,12 @@ const OptionsModal = ({ isColumn, product }) => {
     e.preventDefault();
     optionList.map((item) => {
       if (
-        item.color == "" ||
-        item.value == "" ||
-        item.images.length == 0 ||
-        item.sizes.text == "" ||
-        item.sizes.prices == "" ||
-        item.sizes.quantity == ""
+        item.name == "" ||
+        item.hex_code == "" ||
+        item.photos.length == 0 ||
+        item.product_color_sizes.size == "" ||
+        item.product_color_sizes.price == "" ||
+        item.product_color_sizes.quantity == ""
       ) {
         console.log("please add all fields");
         return;
@@ -50,21 +50,25 @@ const OptionsModal = ({ isColumn, product }) => {
     });
   };
 
-  const [optionList, setOptionList] = useState([optionListData]);
+  const [optionList, setOptionList] = useState(
+    product.product_colors || [optionListData]
+  );
 
   const deleteList = (i) => {
     setOptionList(optionList.filter((item, index) => index !== i));
   };
 
-  const [unlimited, setUnlimited] = useState(false);
-  const [showTotal, setShowTotal] = useState(false);
+  // const [unlimited, setUnlimited] = useState(false);
+  // const [showTotal, setShowTotal] = useState(false);
 
   const [optiontype, setOPtiontype] = useState("color");
+
+  console.log(product.id, optionList);
 
   const handleuploadeImages = (e, i) => {
     let newoptions = optionList.map((item, index) => {
       if (i == index) {
-        return { ...item, images: Array.from(e.target.files) };
+        return { ...item, photos: Array.from(e.target.files) };
       } else {
         return item;
       }
@@ -78,10 +82,16 @@ const OptionsModal = ({ isColumn, product }) => {
 
   const handleOptionChange = (e, index, name) => {
     let newoptions;
-    if (name == "text" || name == "prices" || name == "quantity") {
+    if (name == "size" || name == "price" || name == "quantity") {
       newoptions = optionList.map((item, i) => {
         if (i == index) {
-          return { ...item, sizes: { ...item.sizes, [name]: e.target.value } };
+          return {
+            ...item,
+            product_color_sizes: {
+              ...item.product_color_sizes,
+              [name]: e.target.value.split(","),
+            },
+          };
         } else {
           return item;
         }
@@ -98,8 +108,6 @@ const OptionsModal = ({ isColumn, product }) => {
       setOptionList(newoptions);
     }
   };
-
-  console.log(optionList);
 
   return (
     <>
@@ -208,8 +216,8 @@ const OptionsModal = ({ isColumn, product }) => {
                           className="option-input"
                           placeholder="اللون"
                           style={{ marginRight: "0px", border: "none" }}
-                          value={optionList[i].color}
-                          onChange={(e) => handleOptionChange(e, i, "color")}
+                          value={option.name}
+                          onChange={(e) => handleOptionChange(e, i, "name")}
                           required
                         />
                         <select
@@ -252,8 +260,8 @@ const OptionsModal = ({ isColumn, product }) => {
                               اللون
                             </option>
                             <option
-                              value="sizes"
-                              selected={"sizes" == optiontype}
+                              value="product_color_sizes"
+                              selected={"product_color_sizes" == optiontype}
                             >
                               المقاسات
                             </option>
@@ -285,9 +293,9 @@ const OptionsModal = ({ isColumn, product }) => {
                             <input
                               type="text"
                               placeholder="القيمة"
-                              value={optionList[i].value}
+                              value={option.hex_code}
                               onChange={(e) =>
-                                handleOptionChange(e, i, "value")
+                                handleOptionChange(e, i, "hex_code")
                               }
                               required
                             />
@@ -303,7 +311,7 @@ const OptionsModal = ({ isColumn, product }) => {
                         </div>
                       </div>
                     )}
-                    {optiontype == "sizes" && (
+                    {optiontype == "product_color_sizes" && (
                       <div className="container">
                         <div style={{ display: "flex" }}>
                           <div className="option-container-body">
@@ -315,9 +323,11 @@ const OptionsModal = ({ isColumn, product }) => {
                               <input
                                 type="text"
                                 placeholder="المقاسات"
-                                value={optionList[i].sizes.text}
+                                value={option.product_color_sizes.size.join(
+                                  ", "
+                                )}
                                 onChange={(e) =>
-                                  handleOptionChange(e, i, "text")
+                                  handleOptionChange(e, i, "size")
                                 }
                                 required
                               />
@@ -342,9 +352,11 @@ const OptionsModal = ({ isColumn, product }) => {
                               <input
                                 type="text"
                                 placeholder="الاسعار"
-                                value={optionList[i].sizes.prices}
+                                value={option.product_color_sizes.price.join(
+                                  ", "
+                                )}
                                 onChange={(e) =>
-                                  handleOptionChange(e, i, "prices")
+                                  handleOptionChange(e, i, "price")
                                 }
                                 required
                               />
@@ -370,7 +382,9 @@ const OptionsModal = ({ isColumn, product }) => {
                                 type="text"
                                 placeholder="الكمية"
                                 name="quantity"
-                                value={optionList[i].sizes.quantity}
+                                value={option.product_color_sizes.quantity.join(
+                                  ", "
+                                )}
                                 onChange={(e) =>
                                   handleOptionChange(e, i, "quantity")
                                 }
@@ -412,10 +426,14 @@ const OptionsModal = ({ isColumn, product }) => {
                           </label>
                         </div>
                         <div className="uploaded-images-container d-flex">
-                          {option.images?.map((image, index) => (
+                          {option.photos?.map((image, index) => (
                             <div key={index} className="uploaded-image">
                               <img
-                                src={URL.createObjectURL(image)}
+                                src={
+                                  typeof image == "object"
+                                    ? URL.createObjectURL(image)
+                                    : `https://goservback.alyoumsa.com/public/storage/${image}`
+                                }
                                 alt={`Uploaded ${index + 1}`}
                               />
                             </div>
@@ -427,10 +445,10 @@ const OptionsModal = ({ isColumn, product }) => {
                 ))}
                 <button
                   className="addNewOption"
-                  type="submit"
-                  onClick={() =>
-                    setOptionList((prev) => [...prev, optionListData])
-                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOptionList((prev) => [...prev, optionListData]);
+                  }}
                 >
                   <span className="plus-icon">+</span> إضافة خيار جديد
                 </button>
@@ -443,7 +461,7 @@ const OptionsModal = ({ isColumn, product }) => {
                 </button>
               </form>
 
-              <Form className="mt-5 quantitiesClass">
+              {/* <Form className="mt-5 quantitiesClass">
                 <Form.Group className="mb-3">
                   <Row className="align-items-center">
                     <Col xs="auto">
@@ -673,15 +691,15 @@ const OptionsModal = ({ isColumn, product }) => {
                     )}
                   </div>
                 ))}
-              </Form>
+              </Form> */}
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" className="save-btn-options">
             حفظ
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

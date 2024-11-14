@@ -1,7 +1,9 @@
 import { createContext, useEffect, useReducer } from "react";
 
+import { dummyProducts } from "../../pages/Products/duumyProducts.js";
+
 const INITIAL_STATE = {
-  products: [],
+  products: dummyProducts,
   loading: false,
   error: null,
 };
@@ -21,9 +23,24 @@ const ProductReducer = (state, action) => {
         products: [...state.products, action.payload],
       };
     case "addProducrForm":
+      let newProducts;
+      if (state.products[0].id == 0) {
+        newProducts = state.products.map((product) => {
+          if (product.id == 0) {
+            return {
+              ...product,
+              type: { en: action.payload.type.en },
+            };
+          } else {
+            return product;
+          }
+        });
+      } else {
+        newProducts = [{ ...action.payload }, ...state.products];
+      }
       return {
         ...state,
-        products: [{ ...action.payload }, ...state.products],
+        products: newProducts,
       };
     case "updateMainImages":
       return {
@@ -34,14 +51,12 @@ const ProductReducer = (state, action) => {
               return {
                 ...product,
                 photos: action.payload.files,
-                firstPhoto: action.payload.files[0],
                 updated: true,
               };
             } else if (product.form && product.id == action.payload.id) {
               return {
                 ...product,
                 photos: action.payload.files,
-                firstPhoto: action.payload.files[0],
                 updated: true,
               };
             } else {
@@ -58,7 +73,7 @@ const ProductReducer = (state, action) => {
             if (product.id == action.payload.id) {
               return {
                 ...product,
-                color_photos: action.payload.colors,
+                product_colors: action.payload.colors,
               };
             } else {
               return product;

@@ -64,7 +64,7 @@ const ProductCard = ({ product, onDelete }) => {
                   ? product.firstPhoto
                   : !product.updated && !product.form
                   ? `https://goservback.alyoumsa.com/public/storage/${product.photos[0]}`
-                  : URL.createObjectURL(product.firstPhoto)
+                  : URL.createObjectURL(product.photos[0])
               }
               alt=""
             />

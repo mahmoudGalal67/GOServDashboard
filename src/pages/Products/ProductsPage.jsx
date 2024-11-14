@@ -24,20 +24,20 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    const getProduts = async () => {
-      try {
-        const { data } = await request({
-          url: `/api/dashboard/products`,
-        });
-        dispatch({
-          type: "fetchProducts",
-          payload: data.splice(1, 3),
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProduts();
+    // const getProduts = async () => {
+    //   try {
+    //     const { data } = await request({
+    //       url: `/api/dashboard/products`,
+    //     });
+    //     dispatch({
+    //       type: "fetchProducts",
+    //       payload: data.splice(1, 3),
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // getProduts();
   }, []);
 
   console.log("products", products);
