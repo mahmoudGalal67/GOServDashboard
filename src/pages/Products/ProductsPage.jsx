@@ -72,13 +72,11 @@ const ProductsPage = (props) => {
           <ProductHead
             showProductList={showProductList}
             hideProductList={hideProductList}
-            addNewProduct={addNewProduct}
           />
           {isProductListVisible ? (
             <ProductList
               products={products}
               onDelete={(index) => deleteProduct(index)}
-              addNewProduct={addNewProduct}
             />
           ) : // <ProductListRow
           //   products={products}

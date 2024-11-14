@@ -12,6 +12,7 @@ import { ProductContext } from "../../../components/context/Product";
 
 import arflag from "../../../assets/flag.png";
 import enflag from "../../../assets/united-kingdom.png";
+import { request } from "../../../components/utils/Request";
 
 // function ToggleCheckButton() {
 //   const [isChecked, setIsChecked] = useState(false);
@@ -39,7 +40,83 @@ const ProductCard = ({ product, onDelete }) => {
     setIsRed((prev) => !prev);
   };
 
-  const handleProductSubmit = async () => {};
+  const handleProductSubmit = async () => {
+    let productData = { ...product };
+
+    if (!productData.product_colors) {
+      console.log("please add all fields");
+      return;
+    }
+    if (!productData.photos) {
+      console.log("please add all fields");
+      return;
+    }
+    if (!productData.name || productData.price == "") {
+      console.log("please add all fields");
+      return;
+    }
+    for (const item of productData.product_colors) {
+      if (
+        item.name == "" ||
+        item.hex_code == "" ||
+        item.photos.length == 0 ||
+        item.product_color_sizes.size == [] ||
+        item.product_color_sizes.price == [] ||
+        item.product_color_sizes.quantity == []
+      ) {
+        console.log("please add all fields");
+        return;
+      } else {
+        console.log("ok");
+      }
+    }
+
+    try {
+      const formData1 = new FormData();
+      productData.product_colors.map((photos, i) => {
+        productData.product_colors[i].photos = photos.photos.map((file) => {
+          if (file instanceof File) {
+            formData1.append("imageFile", file);
+            return file.name;
+          } else {
+            return file;
+          }
+        });
+      });
+      const formData2 = new FormData();
+      productData.photos = productData.photos.map((file) => {
+        formData2.append("imageFile", file);
+        if (file instanceof File) {
+          formData1.append("imageFile", file);
+          return file.name;
+        } else {
+          return file;
+        }
+      });
+      const fields = {
+        ...productData,
+      };
+      console.log(fields);
+      console.log(product);
+      // const { data } = await request({
+      //   url:
+      //     product.id != 0
+      //       ? `api/dashboard/update-product/${product.id}`
+      //       : `/api/dashboard/products`,
+      //   method: "POST",
+      //   data: { ...productData },
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      // dispatch({
+      //   type: "addNewProduct",
+      //   payload: data.id,
+      // });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const changeProductState = (name, value, lang) => {
     dispatch({

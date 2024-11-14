@@ -31,28 +31,11 @@ const OptionsModal = ({ isColumn, product }) => {
     },
   };
 
-  const handeleSubmit = (e) => {
-    e.preventDefault();
-    optionList.map((item) => {
-      if (
-        item.name == "" ||
-        item.hex_code == "" ||
-        item.photos.length == 0 ||
-        item.product_color_sizes.size == "" ||
-        item.product_color_sizes.price == "" ||
-        item.product_color_sizes.quantity == ""
-      ) {
-        console.log("please add all fields");
-        return;
-      } else {
-        console.log("ok");
-      }
-    });
-  };
+  const [optionList, setOptionList] = useState();
 
-  const [optionList, setOptionList] = useState(
-    product.product_colors || [optionListData]
-  );
+  useEffect(() => {
+    setOptionList(product.product_colors || [optionListData]);
+  }, [product.product_colors]);
 
   const deleteList = (i) => {
     setOptionList(optionList.filter((item, index) => index !== i));
@@ -62,8 +45,6 @@ const OptionsModal = ({ isColumn, product }) => {
   // const [showTotal, setShowTotal] = useState(false);
 
   const [optiontype, setOPtiontype] = useState("color");
-
-  console.log(product.id, optionList);
 
   const handleuploadeImages = (e, i) => {
     let newoptions = optionList.map((item, index) => {
@@ -97,6 +78,10 @@ const OptionsModal = ({ isColumn, product }) => {
         }
       });
       setOptionList(newoptions);
+      dispatch({
+        type: "updateProductOptions",
+        payload: { id: product.id, colors: newoptions },
+      });
     } else {
       newoptions = optionList.map((item, i) => {
         if (i == index) {
@@ -106,6 +91,10 @@ const OptionsModal = ({ isColumn, product }) => {
         }
       });
       setOptionList(newoptions);
+      dispatch({
+        type: "updateProductOptions",
+        payload: { id: product.id, colors: newoptions },
+      });
     }
   };
 
@@ -449,13 +438,6 @@ const OptionsModal = ({ isColumn, product }) => {
                     e.preventDefault();
                     setOptionList((prev) => [...prev, optionListData]);
                   }}
-                >
-                  <span className="plus-icon">+</span> إضافة خيار جديد
-                </button>
-                <button
-                  className="addNewOption"
-                  type="submit"
-                  onClick={(e) => handeleSubmit(e)}
                 >
                   <span className="plus-icon">+</span> إضافة خيار جديد
                 </button>
