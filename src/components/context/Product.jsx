@@ -1,9 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 
-import { dummyProducts } from "../../pages/Products/duumyProducts.js";
-
 const INITIAL_STATE = {
-  products: dummyProducts,
+  products: [],
   loading: false,
   error: null,
 };

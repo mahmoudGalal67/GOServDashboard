@@ -24,25 +24,23 @@ const ProductsPage = (props) => {
   };
 
   useEffect(() => {
-    // const getProduts = async () => {
-    //   try {
-    //     const { data } = await request({
-    //       url: `/api/dashboard/products`,
-    //     });
-    //     dispatch({
-    //       type: "fetchProducts",
-    //       payload: data.splice(1, 3),
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // getProduts();
+    const getProduts = async () => {
+      try {
+        const { data } = await request({
+          url: `/api/dashboard/products`,
+        });
+        dispatch({
+          type: "fetchProducts",
+          payload: data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProduts();
   }, []);
 
   console.log("products", products);
-
-  const addNewProduct = (newProductData) => {};
 
   const deleteProduct = (index) => {};
 
@@ -72,13 +70,11 @@ const ProductsPage = (props) => {
           <ProductHead
             showProductList={showProductList}
             hideProductList={hideProductList}
-            addNewProduct={addNewProduct}
           />
           {isProductListVisible ? (
             <ProductList
               products={products}
               onDelete={(index) => deleteProduct(index)}
-              addNewProduct={addNewProduct}
             />
           ) : // <ProductListRow
           //   products={products}
