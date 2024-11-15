@@ -18,7 +18,13 @@ const ProductReducer = (state, action) => {
     case "addNewProduct":
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: state.products.map((item) => {
+          if (item.id == 0) {
+            return { ...item, id: action.payload.id };
+          } else {
+            return item;
+          }
+        }),
       };
     case "addProducrForm":
       let newProducts;
@@ -26,8 +32,7 @@ const ProductReducer = (state, action) => {
         newProducts = state.products.map((product) => {
           if (product.id == 0) {
             return {
-              ...product,
-              type: { en: action.payload.type.en },
+              ...action.payload,
             };
           } else {
             return product;

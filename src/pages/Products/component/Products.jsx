@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import "./Products.css";
 import { ProductContext } from "../../../components/context/Product";
 
-const ProductList = ({ onDelete, addNewProduct }) => {
+const ProductList = ({ onDelete }) => {
   const { products } = useContext(ProductContext);
   return (
     <>
@@ -13,7 +13,6 @@ const ProductList = ({ onDelete, addNewProduct }) => {
             key={index}
             product={product}
             onDelete={() => onDelete(index)}
-            addNewProduct={addNewProduct}
           />
         ))}
       </div>

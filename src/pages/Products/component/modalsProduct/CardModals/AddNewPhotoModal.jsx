@@ -93,19 +93,18 @@ const AddNewPhotoModal = ({ isColumn, product }) => {
             ></i>
           </div>
           <div className="uploaded-images-container d-flex">
-            {product.updated &&
-              product.photos?.map((image, index) => (
-                <div key={index} className="uploaded-image">
-                  <img
-                    src={
-                      product.updated
-                        ? URL.createObjectURL(image)
-                        : `https://goservback.alyoumsa.com/public/storage/${image}`
-                    }
-                    alt={`Uploaded ${index + 1}`}
-                  />
-                </div>
-              ))}
+            {product.photos?.map((image, index) => (
+              <div key={index} className="uploaded-image">
+                <img
+                  src={
+                    image instanceof File
+                      ? URL.createObjectURL(image)
+                      : `https://goservback.alyoumsa.com/public/storage/${image}`
+                  }
+                  alt={`Uploaded ${index + 1}`}
+                />
+              </div>
+            ))}
           </div>
         </Modal.Body>
         <Modal.Footer>
