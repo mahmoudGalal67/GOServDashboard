@@ -19,6 +19,8 @@ const AddNewProductModal = () => {
       type: { en: placeholder },
       form: true,
       price: "",
+      description: "",
+      details: "",
     };
     dispatch({ type: "addProducrForm", payload: newProductData });
     handleCloseModal();

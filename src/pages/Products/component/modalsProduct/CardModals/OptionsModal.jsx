@@ -7,21 +7,14 @@ import "react-quill/dist/quill.snow.css";
 import "../../ProductsRow.css";
 import { ProductContext } from "../../../../../components/context/Product";
 
-const OptionsModal = ({ isColumn, product }) => {
-  const { dispatch, products } = useContext(ProductContext);
-
+const OptionsModal = ({ isColumn, product, setUpdatedProduct }) => {
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
   const handleOptionsModalClose = () => setShowOptionsModal(false);
   const handleOptionsModalShow = () => setShowOptionsModal(true);
 
-  const [expandedItem, setExpandedItem] = useState(null);
-  const handleItemToggle = (color) => {
-    setExpandedItem((prev) => (prev === color ? null : color));
-  };
-
   const optionListData = {
-    name: "",
+    color: "",
     hex_code: "",
     photos: [],
     product_color_sizes: {
@@ -37,12 +30,10 @@ const OptionsModal = ({ isColumn, product }) => {
     setOptionList(product.product_colors || [optionListData]);
   }, [product.product_colors]);
 
-  const deleteList = (i) => {
+  const deleteList = (e, i) => {
+    e.preventDefault();
     setOptionList(optionList.filter((item, index) => index !== i));
   };
-
-  // const [unlimited, setUnlimited] = useState(false);
-  // const [showTotal, setShowTotal] = useState(false);
 
   const [optiontype, setOPtiontype] = useState("color");
 
@@ -55,10 +46,7 @@ const OptionsModal = ({ isColumn, product }) => {
       }
     });
     setOptionList(newoptions);
-    dispatch({
-      type: "updateProductOptions",
-      payload: { id: product.id, colors: newoptions },
-    });
+    setUpdatedProduct((prev) => ({ ...prev, product_colors: newoptions }));
   };
 
   const handleOptionChange = (e, index, name) => {
@@ -78,10 +66,7 @@ const OptionsModal = ({ isColumn, product }) => {
         }
       });
       setOptionList(newoptions);
-      dispatch({
-        type: "updateProductOptions",
-        payload: { id: product.id, colors: newoptions },
-      });
+      setUpdatedProduct((prev) => ({ ...prev, product_colors: newoptions }));
     } else {
       newoptions = optionList.map((item, i) => {
         if (i == index) {
@@ -91,10 +76,7 @@ const OptionsModal = ({ isColumn, product }) => {
         }
       });
       setOptionList(newoptions);
-      dispatch({
-        type: "updateProductOptions",
-        payload: { id: product.id, colors: newoptions },
-      });
+      setUpdatedProduct((prev) => ({ ...prev, product_colors: newoptions }));
     }
   };
 
@@ -205,8 +187,8 @@ const OptionsModal = ({ isColumn, product }) => {
                           className="option-input"
                           placeholder="اللون"
                           style={{ marginRight: "0px", border: "none" }}
-                          value={option.name}
-                          onChange={(e) => handleOptionChange(e, i, "name")}
+                          value={option.color}
+                          onChange={(e) => handleOptionChange(e, i, "color")}
                           required
                         />
                         <select
@@ -265,7 +247,7 @@ const OptionsModal = ({ isColumn, product }) => {
 
                         <button
                           className="delete-button-list"
-                          onClick={() => deleteList(i)}
+                          onClick={(e) => deleteList(e, i)}
                         >
                           <i className="icon sicon-trash-2"></i>
                         </button>
@@ -419,7 +401,7 @@ const OptionsModal = ({ isColumn, product }) => {
                             <div key={index} className="uploaded-image">
                               <img
                                 src={
-                                  typeof image == "object"
+                                  typeof image === "object" && image
                                     ? URL.createObjectURL(image)
                                     : `https://goservback.alyoumsa.com/public/storage/${image}`
                                 }

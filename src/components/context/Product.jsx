@@ -19,8 +19,8 @@ const ProductReducer = (state, action) => {
       return {
         ...state,
         products: state.products.map((item) => {
-          if (item.id == 0) {
-            return { ...item, id: action.payload.id };
+          if (item.id == action.payload.newproduct.id) {
+            return { ...action.payload.newproduct };
           } else {
             return item;
           }
@@ -28,7 +28,9 @@ const ProductReducer = (state, action) => {
       };
     case "addProducrForm":
       let newProducts;
-      if (state.products[0].id == 0) {
+      if (state.products.lenght == 0) {
+        newProducts = [{ ...action.payload }, ...state.products];
+      } else if (state.products[0]?.id == 0) {
         newProducts = state.products.map((product) => {
           if (product.id == 0) {
             return {
@@ -85,24 +87,27 @@ const ProductReducer = (state, action) => {
         ],
       };
     case "updateProduct":
+      const productIndex = state.products.findIndex(
+        (product) => product.id == action.payload.id
+      );
+      if (productIndex !== -1) {
+        const updatedProduct = {
+          ...state.products[productIndex],
+          [action.payload.name]: action.payload.lang
+            ? { en: action.payload.value, ar: action.payload.value }
+            : action.payload.value,
+        };
+        const newProducts = [...state.products];
+        newProducts[productIndex] = updatedProduct;
+        return { ...state, products: newProducts };
+      }
+      return state;
+    case "deleteProduct":
       return {
         ...state,
-        products: state.products.map((product) => {
-          if (product.id == action.payload.id) {
-            return {
-              ...product,
-              [action.payload.name]:
-                action.payload.lang == true
-                  ? {
-                      en: action.payload.value,
-                      ar: action.payload.value,
-                    }
-                  : action.payload.value,
-            };
-          } else {
-            return product;
-          }
-        }),
+        products: state.products.filter(
+          (product) => product.id != action.payload.id
+        ),
       };
     default:
       return state;
@@ -111,8 +116,6 @@ const ProductReducer = (state, action) => {
 
 export const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ProductReducer, INITIAL_STATE);
-
-  useEffect(() => {}, [state]);
 
   return (
     <ProductContext.Provider

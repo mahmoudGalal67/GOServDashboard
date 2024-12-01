@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, memo, useMemo } from "react";
 import "./ProductCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +13,9 @@ import { ProductContext } from "../../../components/context/Product";
 import arflag from "../../../assets/flag.png";
 import enflag from "../../../assets/united-kingdom.png";
 import { request } from "../../../components/utils/Request";
+
+import { toast } from "react-toastify";
+import DotLoader from "react-spinners/DotLoader";
 
 // function ToggleCheckButton() {
 //   const [isChecked, setIsChecked] = useState(false);
@@ -31,103 +34,163 @@ import { request } from "../../../components/utils/Request";
 //   );
 // }
 
-const ProductCard = ({ product, onDelete }) => {
+const areEqual = (prevProps, nextProps) => {
+  const { product: prevProduct } = prevProps;
+  const { product: nextProduct } = nextProps;
+
+  // Check if the references are the same for the outer properties
+  return (
+    prevProduct.id === nextProduct.id &&
+    shallowEqual(prevProduct.name, nextProduct.name) &&
+    shallowEqual(prevProduct.description, nextProduct.description) &&
+    shallowEqual(prevProduct.details, nextProduct.details) &&
+    prevProduct.category === nextProduct.category &&
+    prevProduct.brand === nextProduct.brand &&
+    prevProduct.weight === nextProduct.weight &&
+    prevProduct.price === nextProduct.price &&
+    shallowEqual(prevProduct.photos, nextProduct.photos) &&
+    prevProduct.updated_at === nextProduct.updated_at &&
+    prevProduct.created_at === nextProduct.created_at &&
+    shallowEqual(prevProduct.product_colors, nextProduct.product_colors)
+  );
+};
+
+// Utility function for shallow comparison of objects and arrays
+const shallowEqual = (obj1, obj2) => {
+  if (Array.isArray(obj1) && Array.isArray(obj2)) {
+    // Check array lengths and shallowly compare each element
+    if (obj1.length !== obj2.length) return false;
+    for (let i = 0; i < obj1.length; i++) {
+      if (obj1[i] !== obj2[i]) return false;
+    }
+    return true;
+  }
+
+  if (
+    typeof obj1 === "object" &&
+    obj1 !== null &&
+    typeof obj2 === "object" &&
+    obj2 !== null
+  ) {
+    // Compare keys of both objects
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+
+    if (keys1.length !== keys2.length) return false;
+
+    for (let key of keys1) {
+      if (obj1[key] !== obj2[key]) return false;
+    }
+    return true;
+  }
+
+  // If they are not objects/arrays, just compare values directly
+  return obj1 === obj2;
+};
+
+const ProductCard = ({ product, categories, setcategories }) => {
+  const [updatedProduct, setUpdatedProduct] = useState(product);
+
+  const override = {
+    position: "absolute",
+    inset: "50%",
+  };
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  useEffect(() => {
+    setUpdatedProduct(product);
+  }, [product]);
+
   const { dispatch } = useContext(ProductContext);
 
   const [lang, setLang] = useState("en");
   const [isRed, setIsRed] = useState(false);
+
+  const [unlimited, setUnlimited] = useState(false);
+
   const handleColorClick = () => {
     setIsRed((prev) => !prev);
   };
+  const deleteProduct = async (id) => {
+    if (id != 0) {
+      request({
+        url: `api/dashboard/products/${id}`,
+        method: "DELETE",
+      });
+    }
+    dispatch({
+      type: "deleteProduct",
+      payload: { id },
+    });
+  };
 
   const handleProductSubmit = async () => {
-    let productData = JSON.parse(JSON.stringify(product));
+    let productData = JSON.parse(JSON.stringify(updatedProduct));
 
-    if (!productData.product_colors) {
-      console.log("please add all fields");
+    if (
+      !productData.name ||
+      !productData.photos ||
+      productData.price == "" ||
+      !productData.category
+    ) {
+      toast.warn("please add all fields");
+
       return;
     }
-    if (!productData.photos) {
-      console.log("please add all fields");
-      return;
-    }
-    if (!productData.name || productData.price == "") {
-      console.log("please add all fields");
-      return;
-    }
-    for (const item of productData.product_colors) {
-      if (
-        item.name == "" ||
-        item.hex_code == "" ||
-        item.photos.length == 0 ||
-        item.product_color_sizes.size == [] ||
-        item.product_color_sizes.price == [] ||
-        item.product_color_sizes.quantity == []
-      ) {
-        console.log("please add all fields");
-        return;
-      } else {
-        console.log("ok");
+    if (!unlimited && productData.product_colors) {
+      for (const item of productData.product_colors) {
+        if (
+          item.color == "" ||
+          item.hex_code == "" ||
+          item.photos.length == 0 ||
+          item.product_color_sizes.size == [] ||
+          item.product_color_sizes.price == [] ||
+          item.product_color_sizes.quantity == []
+        ) {
+          toast.warn("please add all fields");
+
+          return;
+        }
       }
     }
 
     try {
-      const formData1 = new FormData();
-      productData.product_colors.map((photos, i) => {
-        productData.product_colors[i].photos = photos.photos.map((file) => {
-          if (file instanceof File) {
-            formData1.append("imageFile", file);
-            return file.name;
-          } else {
-            return file;
-          }
-        });
+      setloading(true);
+      const { data } = await request({
+        url:
+          updatedProduct.id != 0
+            ? `api/dashboard/update-product/${updatedProduct.id}`
+            : `/public/api/dashboard/products`,
+        method: "POST",
+        data: {
+          ...updatedProduct,
+          brand: "salah",
+          weight: "10.00",
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      const formData2 = new FormData();
-      productData.photos = productData.photos.map((file) => {
-        formData2.append("imageFile", file);
-        if (file instanceof File) {
-          formData1.append("imageFile", file);
-          return file.name;
-        } else {
-          return file;
-        }
+      setloading(false);
+      toast.success("you have been added product successfuly");
+
+      dispatch({
+        type: "addNewProduct",
+        payload: { newproduct: data },
       });
-      const fields = {
-        ...productData,
-      };
-      console.log(fields);
-      console.log(product);
-      // const { data } = await request({
-      //   url:
-      //     product.id != 0
-      //       ? `api/dashboard/update-product/${product.id}`
-      //       : `/api/dashboard/products`,
-      //   method: "POST",
-      //   data: { ...productData },
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // dispatch({
-      //   type: "addNewProduct",
-      //   payload: data.id,
-      // });
     } catch (error) {
+      toast.error(error.response.data.message);
       console.log(error);
+      setloading(false);
     }
   };
 
   const changeProductState = (name, value, lang) => {
-    dispatch({
-      type: "updateProduct",
-      payload: {
-        id: product.id,
-        name: name,
-        value: value,
-        lang,
-      },
-    });
+    setUpdatedProduct((prev) => ({
+      ...prev,
+      [name]: lang ? { en: value, ar: value } : value,
+    }));
   };
 
   return (
@@ -137,15 +200,18 @@ const ProductCard = ({ product, onDelete }) => {
           <div className="product-image">
             <img
               src={
-                !product.updated && product.form
-                  ? product.firstPhoto
-                  : !product.updated && !product.form
-                  ? `https://goservback.alyoumsa.com/public/storage/${product.photos[0]}`
-                  : URL.createObjectURL(product.photos[0])
+                !updatedProduct.updated && updatedProduct.form
+                  ? updatedProduct.firstPhoto
+                  : !updatedProduct.updated && !updatedProduct.form
+                  ? `https://goservback.alyoumsa.com/public/storage/${updatedProduct.photos[0]}`
+                  : URL.createObjectURL(updatedProduct.photos[0])
               }
               alt=""
             />
-            <button className="upload-icon deleteCardButton" onClick={onDelete}>
+            <button
+              className="upload-icon deleteCardButton"
+              onClick={() => deleteProduct(updatedProduct.id)}
+            >
               X
             </button>
             <div className="media-buttons">
@@ -159,7 +225,11 @@ const ProductCard = ({ product, onDelete }) => {
                 </div>
               </div>
               <div className="left">
-                <AddNewPhotoModal isColumn={true} product={product} />
+                <AddNewPhotoModal
+                  isColumn={true}
+                  product={updatedProduct}
+                  setUpdatedProduct={setUpdatedProduct}
+                />
               </div>
             </div>
           </div>
@@ -175,9 +245,11 @@ const ProductCard = ({ product, onDelete }) => {
                   <input
                     type="text"
                     required
-                    placeholder={product.type ? product.type.en : ""}
+                    placeholder={
+                      updatedProduct.type ? updatedProduct.type.en : ""
+                    }
                     name="name"
-                    value={product.name ? product.name.en : ""}
+                    value={updatedProduct.name ? updatedProduct.name.en : ""}
                     onChange={(e) =>
                       changeProductState(e.target.name, e.target.value, true)
                     }
@@ -208,7 +280,7 @@ const ProductCard = ({ product, onDelete }) => {
                   type="text"
                   placeholder="السعر"
                   name="price"
-                  value={product.price}
+                  value={updatedProduct.price}
                   onChange={(e) =>
                     changeProductState("price", e.target.value, false)
                   }
@@ -219,12 +291,10 @@ const ProductCard = ({ product, onDelete }) => {
               </div>
             </div>
             <div className="field" style={{ padding: "10px" }}>
-              <div className="numberOfQuantity">
-                <p style={{ color: "black", fontSize: "10px" }}>
-                  كمية غير محدودة
-                </p>
-              </div>
-              <ProductNotificationModal isColumn={true} />
+              <ProductNotificationModal
+                isColumn={true}
+                setUpdatedProduct={setUpdatedProduct}
+              />
 
               <div className="icon-2" style={{ position: "relative" }}>
                 <div
@@ -233,7 +303,9 @@ const ProductCard = ({ product, onDelete }) => {
                     left: 10,
                     right: 14,
                     top: -10,
+                    cursor: "pointer",
                   }}
+                  onClick={() => setUnlimited((prev) => !prev)}
                 >
                   <svg
                     data-v-4ed85b4c=""
@@ -241,6 +313,7 @@ const ProductCard = ({ product, onDelete }) => {
                     viewBox="0 0 30 30"
                     width="20px"
                     height="20px"
+                    style={{ fill: unlimited ? "red" : "" }}
                   >
                     <path
                       data-v-4ed85b4c=""
@@ -249,18 +322,54 @@ const ProductCard = ({ product, onDelete }) => {
                   </svg>
                 </div>
               </div>
-              <OptionsModal isColumn={true} product={product} />
+              {unlimited ? (
+                <div className="numberOfQuantity">
+                  <p style={{ color: "black", fontSize: "10px" }}>
+                    كمية غير محدودة
+                  </p>
+                </div>
+              ) : (
+                <OptionsModal
+                  isColumn={true}
+                  product={updatedProduct}
+                  setUpdatedProduct={setUpdatedProduct}
+                />
+              )}
             </div>
             <div className="field">
               <div className="selectClassificationClass">
-                <select>
-                  <option value="">اختر تصنيف المنتج</option>
+                <select
+                  name="category"
+                  onChange={(e) =>
+                    changeProductState(e.target.name, e.target.value)
+                  }
+                >
+                  <option disabled selected={product.id == 0}>
+                    اختر تصنيف المنتج
+                  </option>
+                  {categories.map((category) => (
+                    <option
+                      value={category.name.en}
+                      selected={category.name.en == product.category}
+                    >
+                      {category.name.en}
+                    </option>
+                  ))}
                 </select>
               </div>
-              <CategoryModal isColumn={true} />
+              <CategoryModal
+                isColumn={true}
+                categories={categories}
+                setUpdatedProduct={setUpdatedProduct}
+                setcategories={setcategories}
+              />
             </div>
             <div className="field">
-              <DetailsModal isColumn={true} />
+              <DetailsModal
+                isColumn={true}
+                product={updatedProduct}
+                setUpdatedProduct={setUpdatedProduct}
+              />
               <div className="selectDetailsClass">
                 <select name="" placeholder="اختر تصنيف المنتج">
                   <option value="">المزيد</option>
@@ -271,14 +380,24 @@ const ProductCard = ({ product, onDelete }) => {
                 </select>
               </div>
             </div>
-            <button className="save-button" onClick={handleProductSubmit}>
-              حفظ
+            <button
+              className="save-button"
+              onClick={handleProductSubmit}
+              disabled={loading}
+            >
+              {loading ? "... Loading " : "حفظ"}
             </button>
           </div>
         </div>
       </div>
+      <DotLoader
+        color="#2ffff3"
+        size={60}
+        cssOverride={override}
+        loading={loading}
+      />
     </>
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

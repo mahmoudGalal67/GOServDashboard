@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import "react-quill/dist/quill.snow.css";
 import { ProductContext } from "../../../../../components/context/Product";
 
-const AddNewPhotoModal = ({ isColumn, product }) => {
+const AddNewPhotoModal = ({ isColumn, product, setUpdatedProduct }) => {
   const { dispatch, products } = useContext(ProductContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +16,10 @@ const AddNewPhotoModal = ({ isColumn, product }) => {
 
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
-    dispatch({ type: "updateMainImages", payload: { id: product.id, files } });
+
+    setUpdatedProduct((prev) => ({ ...prev, photos: files, updated: true }));
+
+    // dispatch({ type: "updateMainImages", payload: { id: product.id, files } });
 
     setUploadedImages(files);
   };
@@ -73,8 +76,7 @@ const AddNewPhotoModal = ({ isColumn, product }) => {
             />
             <label htmlFor="file-input" style={{ cursor: "pointer" }}>
               <div className="upload-button">
-                <p>اسحب الصورة وأفلتها هنا</p>
-                <p> او تصفح من جهازك</p>
+                <p> تصفح من جهازك</p>
               </div>
             </label>
           </div>

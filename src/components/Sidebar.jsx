@@ -13,8 +13,11 @@ import { CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 
+import { useSearchParams } from "react-router-dom";
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (window.innerWidth < 1024) {
@@ -104,7 +107,9 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <p className="text-center ">متجر الهدايا</p>
+        <p className="text-center ">
+          {searchParams.get("name") ? searchParams.get("name") : "متجر الهدايا"}
+        </p>
         <div
           style={{
             border: "1px solid #57578e",
@@ -214,7 +219,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/mahally" className="sidebarLink ">
-              <i class="sicon-mahally"></i>
+              <i className="sicon-mahally"></i>
               محلي
             </Link>
           </li>
@@ -233,13 +238,13 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/experts" className="sidebarLink ">
-              <i class="sicon-briefcase"></i>
+              <i className="sicon-briefcase"></i>
               خدمات التاجر{" "}
             </Link>
           </li>
           <li>
             <Link to="/influencers" className="sidebarLink ">
-              <i class="sicon-user-list"></i>
+              <i className="sicon-user-list"></i>
               المؤثرين{" "}
             </Link>
           </li>
@@ -264,19 +269,19 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/marketPlace" className="sidebarLink ">
-              <i class="sicon-store"></i>
+              <i className="sicon-store"></i>
               باقة المتجر
             </Link>
           </li>
           <li>
             <Link to="/settings" className="sidebarLink ">
-              <i class="sicon-settings"></i>
+              <i className="sicon-settings"></i>
               اعدادات المتجر
             </Link>
           </li>
           <li>
             <Link to="/wallet" className="sidebarLink ">
-              <i class="sicon-wallet"></i>
+              <i className="sicon-wallet"></i>
               المحفظة والفواتير
             </Link>
           </li>
@@ -295,13 +300,13 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/themes" className="sidebarLink ">
-              <i class="sicon-store"></i>
+              <i className="sicon-store"></i>
               متجر الثيمات
             </Link>
           </li>
           <li>
             <a href="#" className="sidebarLink ">
-              <i class="sicon-window-layout"></i>
+              <i className="sicon-window-layout"></i>
               تصميم المتجر
             </a>
           </li>

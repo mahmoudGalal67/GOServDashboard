@@ -1,15 +1,15 @@
-.product-container{
+.product-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0px;
-  width:98%;
-  overflow-x:hidden;
-  margin:auto auto !important;
+  width: 98%;
+  overflow-x: hidden;
+  margin: auto auto !important;
 }
 
 .product-card {
-  width:25vw !important;
+  width: 25vw !important;
   height: 645px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -111,10 +111,10 @@
   border: none;
   cursor: pointer;
 }
-.deleteCardButton{
-  color:blcak;
-  background-color:red;
-  font-weight:bold;
+.deleteCardButton {
+  color: blcak;
+  background-color: red;
+  font-weight: bold;
 }
 .product-details {
   padding: 7px;
@@ -305,20 +305,22 @@
   width: 250px;
 }
 
-.product-input:focus, .language-select:focus {
+.product-input:focus,
+.language-select:focus {
   outline: none;
 }
 
-i.sicon-packed-box ,i.sicon-dollar-coin-stack{
+i.sicon-packed-box,
+i.sicon-dollar-coin-stack {
   margin-left: 8px;
   color: #888;
 }
-i.sicon-dollar-coin-stack{
-  margin-right:23px; 
+i.sicon-dollar-coin-stack {
+  margin-right: 23px;
 }
 .product-input::placeholder {
-  font-size: 8px; 
-  color: #888;    
+  font-size: 8px;
+  color: #888;
 }
 .field .InputNumberClass {
   width: 100vw;
@@ -326,7 +328,6 @@ i.sicon-dollar-coin-stack{
 
 .field .InputNumberClass input {
   outline: none;
-
 }
 .field .labelPriceClass {
   width: 15vw;
@@ -344,7 +345,7 @@ i.sicon-dollar-coin-stack{
 .field .numberOfQuantity {
   width: 30vw;
   border: none;
-  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
 }
 
 .field .icon-1,
@@ -352,9 +353,9 @@ i.sicon-dollar-coin-stack{
   width: 15vw;
   border: none;
   border-left: 1px solid #aaa;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .field .quantityAndChoies {
@@ -383,7 +384,7 @@ i.sicon-dollar-coin-stack{
 
 .field .selectClassificationClass select {
   outline: none;
-  width:89%;
+  width: 89%;
 }
 
 .field .classificationNameClass p {
@@ -411,8 +412,7 @@ i.sicon-dollar-coin-stack{
 
 .field .selectDetailsClass select {
   outline: none;
-  width:75%;
-
+  width: 75%;
 }
 
 .field label {
@@ -437,17 +437,29 @@ i.sicon-dollar-coin-stack{
   cursor: pointer;
 }
 
+.save-button:disabled {
+  opacity: 0.7;
+}
+
 .save-button:hover {
   background-color: #ffe0b5;
 }
-.addnewphoto .modal-header,.options .modal-header,.CategoryModal .modal-header,.DetailsModalClass .modal-header,.notification .modal-header{
+.addnewphoto .modal-header,
+.options .modal-header,
+.CategoryModal .modal-header,
+.DetailsModalClass .modal-header,
+.notification .modal-header {
   background-color: #b4d4d2ab;
-  color:black;
+  color: black;
 }
-.addnewphoto .close-button,.options .close-button,.CategoryModal .close-button,.DetailsModalClass .close-button ,.modal-header .close-button{
-  text-decoration:none;
-  font-size:23px;
-  color:black;
+.addnewphoto .close-button,
+.options .close-button,
+.CategoryModal .close-button,
+.DetailsModalClass .close-button,
+.modal-header .close-button {
+  text-decoration: none;
+  font-size: 23px;
+  color: black;
 }
 .photoPopup .head-section {
   direction: rtl;
@@ -574,11 +586,11 @@ i.sicon-dollar-coin-stack{
   border-radius: 50%;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #668fbb;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   transform: translateX(14px);
 }
 
@@ -668,7 +680,7 @@ button:focus {
 
 .toggleheader-section .right-toggleHeader {
   width: 50vw;
-  border:1px solid #ddd;
+  border: 1px solid #ddd;
   background-color: #ffff;
 }
 
@@ -683,13 +695,11 @@ button:focus {
 .toggleheader-section .left-toggleHeader {
   display: flex;
   width: 40vw;
-
 }
 
-.toggleheader-section .left-toggleHeader .iconSelectclass{
+.toggleheader-section .left-toggleHeader .iconSelectclass {
   width: 70%;
-  margin-right:10px;
-
+  margin-right: 10px;
 }
 
 .toggleheader-section .left-toggleHeader button {
@@ -703,44 +713,44 @@ button:focus {
   margin-right: 10px;
   width: 45%;
 }
-.right-toggleHeader .option-input::placeholder{
-  margin-right:10px !important;
+.right-toggleHeader .option-input::placeholder {
+  margin-right: 10px !important;
 }
 .option-select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.option-container-body{
-  width:90%;
-  display:flex;
-  border:1px solid #ddd;
-  margin:auto auto;
-  padding:5px;
-  margin-bottom:5px;
+.option-container-body {
+  width: 90%;
+  display: flex;
+  border: 1px solid #ddd;
+  margin: auto auto;
+  padding: 5px;
+  margin-bottom: 5px;
   background-color: #ffff;
 }
-.option-container-body .option-select-body{
- width:15%;
+.option-container-body .option-select-body {
+  width: 15%;
 }
-.option-container-body .option-input-body{
- width:90%;
+.option-container-body .option-input-body {
+  width: 90%;
 }
 
 .delete-button-body {
   background: none;
-  height:40px;
-  width:40px;
+  height: 40px;
+  width: 40px;
   color: red;
   cursor: pointer;
-  margin-left:20px;
-  margin-top:10px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
-.delete-button-body i{
-  border:1px solid #aaa;
-  border-radius:50%;
-  padding:5px;
-  font-size:25px !important;
+.delete-button-body i {
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 25px !important;
 }
 
 .add-option-button {
@@ -779,16 +789,15 @@ button:focus {
 }
 
 .delete-button-list {
-  background:red;
+  background: red;
   border: 2px solid #ffffff;
   color: white;
   cursor: pointer;
   margin-right: 10px;
-
 }
 
-.delete-button-list i{
-  font-size: 20px !important; 
+.delete-button-list i {
+  font-size: 20px !important;
 }
 
 .CategoryModal .modal-header {
@@ -857,23 +866,22 @@ button:focus {
 }
 
 .CategoryModal select {
-    width: 98%;
-    padding: 10px;
-    margin-top: 11px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    margin-right:0 !important;
-
+  width: 98%;
+  padding: 10px;
+  margin-top: 11px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-right: 0 !important;
 }
 
 .field-category {
-    display: flex;
-    border: 1px solid #ced4da;
-    height: 57px;
-    margin-bottom: 25px;
-    width: 97%;
-    border-radius: 10px;
-    margin-right: 15px;
+  display: flex;
+  border: 1px solid #ced4da;
+  height: 57px;
+  margin-bottom: 25px;
+  width: 97%;
+  border-radius: 10px;
+  margin-right: 15px;
 }
 
 .field-category .InputCategoryClass {
@@ -882,7 +890,7 @@ button:focus {
 
 .field-category .InputCategoryClass input {
   width: 100%;
-  margin-top:3px;
+  margin-top: 3px;
 }
 
 .field-category .selectCategoryClass {
@@ -910,12 +918,12 @@ button:focus {
 .modal-subheader {
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   border: 1px solid #0943af;
-  width:95%;
-  margin:auto auto;
+  width: 95%;
+  margin: auto auto;
   margin-top: 5px;
-  border-radius:9px;
+  border-radius: 9px;
 }
 
 .subheader-button {
@@ -923,7 +931,6 @@ button:focus {
   color: #005379;
   border: none !important;
   width: 40%;
-
 }
 .subheader-button:active,
 .subheader-button:focus {
@@ -950,7 +957,6 @@ button:focus {
 .footerDetailsClass {
   display: flex;
   justify-content: space-between;
-
 }
 
 .file-upload-section {
@@ -1011,7 +1017,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  border:1px solid #ff4d4d;
+  border: 1px solid #ff4d4d;
 }
 
 .delete-button .icon {
@@ -1066,20 +1072,33 @@ select {
   margin-bottom: 10px;
 }
 
-.DetailsBodyClass .product-details-section .form-group-flex .form-group-flex-one {
+.DetailsBodyClass
+  .product-details-section
+  .form-group-flex
+  .form-group-flex-one {
   width: 47%;
 }
 
-.DetailsBodyClass .product-details-section .form-group-flex .form-group-flex-one input[type="text"] {
+.DetailsBodyClass
+  .product-details-section
+  .form-group-flex
+  .form-group-flex-one
+  input[type="text"] {
   width: 96%;
-
 }
 
-.DetailsBodyClass .product-details-section .form-group-flex-3col .form-group-flex-col {
+.DetailsBodyClass
+  .product-details-section
+  .form-group-flex-3col
+  .form-group-flex-col {
   width: 29%;
 }
 
-.DetailsBodyClass .product-details-section .form-group-flex-3col .form-group-flex-col input[type="text"] {
+.DetailsBodyClass
+  .product-details-section
+  .form-group-flex-3col
+  .form-group-flex-col
+  input[type="text"] {
   width: 91%;
 }
 
@@ -1092,7 +1111,7 @@ select {
   width: 89%;
   border-radius: 6px;
   margin-right: 31px;
-  padding-top:4px;
+  padding-top: 4px;
 }
 
 .field-productDetails .InputproductDetailsClass {
@@ -1111,8 +1130,8 @@ select {
   width: 70%;
   border: none !important;
   border-right: 1px solid #ced4da;
-  margin-top:-4px;
-  height:43px;
+  margin-top: -4px;
+  height: 43px;
 }
 
 .form-control {
@@ -1134,7 +1153,7 @@ select {
 .additional-content {
   border: 1px solid #ccc;
   margin: 15px;
-  background-color:#e2e4e7;
+  background-color: #e2e4e7;
 }
 .product-form {
   border: 1px solid #ddd;
@@ -1142,8 +1161,8 @@ select {
   border-radius: 10px;
 }
 
-.quantity-section{
-  display:flex;
+.quantity-section {
+  display: flex;
   justify-content: space-between;
 }
 .quantity-control {
@@ -1161,95 +1180,23 @@ select {
   font-weight: bold;
 }
 
-.addNewOptionDetails{
+.addNewOptionDetails {
   margin-top: 10px;
   padding: 20px;
-  font-size:20px;
-  color:black;
+  font-size: 20px;
+  color: black;
   cursor: pointer;
   width: 100%;
-  border:1px solid #999;
+  border: 1px solid #999;
 }
 
-@media (min-width: 550px) and (max-width:1100px) {
+@media (min-width: 550px) and (max-width: 1100px) {
   .product-card {
-    width:100% !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 550px) {
   .product-card {
-    width:500px !important;
+    width: 500px !important;
   }
 }
-
-/* @media (min-width: 1800px) {
-  .product-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    overflow-x:hidden;
-    margin:auto auto !important;
-  }
-  .product-card {
-    width: 400px !important;
-  }
-}
-@media (min-width: 1700px) {
-  .product-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    overflow-x:hidden;
-    margin:auto auto !important;
-  }
-  .product-card {
-    width: 360px !important;
-  }
-}
-@media (min-width: 1600px) {
-  .product-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    overflow-x:hidden;
-    margin:auto auto !important;
-  }
-  .product-card {
-    width: 350px !important;
-  }
-}
-@media (min-width:1400px) and (max-width: 1500px) {
-  .product-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  
-  }
-  .product-card {
-    width:350px;
-  }
-
-}
-@media (min-width:1300px) and (max-width: 1400px) {
-  .product-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-  
-  }
-  .product-card {
-    width:320px;
-  }
-}
-@media (max-width: 1000px) {
-  .product-card {
-    width: 400px;
-    display:flex;
-    justify-content: center !important;
-  }
-} */

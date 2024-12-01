@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a99bfd87.css",
-    "main.js": "/static/js/main.cfddbf28.js",
+    "main.css": "/static/css/main.155602b0.css",
+    "main.js": "/static/js/main.8cd11645.js",
     "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
     "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
     "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
@@ -11,6 +11,7 @@
     "static/media/swiper3.webp": "/static/media/swiper3.ba3114b640d08b9bdb02.webp",
     "static/media/swiper1.webp": "/static/media/swiper1.142652347b6c784792a9.webp",
     "static/media/HeadImage.png": "/static/media/HeadImage.bb7240a8b979d3ff3af5.png",
+    "static/media/flag.png": "/static/media/flag.8dc6983d0aed76acdc24.png",
     "static/media/social.png": "/static/media/social.fb6833153f8c42dc5808.png",
     "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
     "static/media/tamara.png": "/static/media/tamara.456afa54d0893424ccbe.png",
@@ -27,11 +28,11 @@
     "index.html": "/index.html",
     "static/media/plus.svg": "/static/media/plus.04eafbfa88a5b5eb0055.svg",
     "static/media/minusFIll.svg": "/static/media/minusFIll.76c55a567c9cf1c9d7f2.svg",
-    "main.a99bfd87.css.map": "/static/css/main.a99bfd87.css.map",
-    "main.cfddbf28.js.map": "/static/js/main.cfddbf28.js.map"
+    "main.155602b0.css.map": "/static/css/main.155602b0.css.map",
+    "main.8cd11645.js.map": "/static/js/main.8cd11645.js.map"
   },
   "entrypoints": [
-    "static/css/main.a99bfd87.css",
-    "static/js/main.cfddbf28.js"
+    "static/css/main.155602b0.css",
+    "static/js/main.8cd11645.js"
   ]
 }

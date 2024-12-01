@@ -3,14 +3,16 @@ import "../../ProductCard.css";
 import "../../ProductsRow.css";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
+import { request } from "../../../../../components/utils/Request";
 
-const CategoryModal = ({ isColumn }) => {
+const CategoryModal = ({ isColumn, setcategories }) => {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [isMainCategory, setIsMainCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [language, setLanguage] = useState("AR");
-  const [categoryNameAR, setCategoryNameAR] = useState(""); 
-  const [categoryNameEN, setCategoryNameEN] = useState(""); 
+  const [categoryNameAR, setCategoryNameAR] = useState("");
+  const [categoryNameEN, setCategoryNameEN] = useState("");
+  const [file, setfile] = useState(null);
 
   const handleCategoryModalClose = () => setShowCategoryModal(false);
   const handleCategoryModalShow = () => setShowCategoryModal(true);
@@ -23,7 +25,6 @@ const CategoryModal = ({ isColumn }) => {
     setLanguage(e.target.value);
   };
 
-
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (language === "AR") {
@@ -32,25 +33,34 @@ const CategoryModal = ({ isColumn }) => {
       setCategoryNameEN(value);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-     const data = {
+    const data = {
       name: {
         ar: categoryNameAR,
         en: categoryNameEN,
       },
-      photo:""
+      description: {
+        ar: categoryNameAR,
+        en: categoryNameEN,
+      },
+      photo: file,
     };
 
     try {
-      const response = await axios.post(
-        "https://goservback.alyoumsa.com/api/dashboard/categories",
-        data
-      );
+      const response = await request({
+        url: "api/dashboard/categories",
+        method: "POST",
+        data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.status === 200 || response.status === 201) {
-        console.log("Category added successfully", response.data);
         alert("Category added successfully");
+        setcategories((prev) => [...prev, response.data]);
         setShowCategoryModal(false);
       }
     } catch (error) {
@@ -100,7 +110,9 @@ const CategoryModal = ({ isColumn }) => {
                   <input
                     type="text"
                     placeholder={
-                      language === "AR" ? "ادخل اسم التصنيف" : "Enter the category name"
+                      language === "AR"
+                        ? "ادخل اسم التصنيف"
+                        : "Enter the category name"
                     }
                     value={language === "AR" ? categoryNameAR : categoryNameEN}
                     onChange={handleInputChange}
@@ -121,6 +133,26 @@ const CategoryModal = ({ isColumn }) => {
                     <option value="EN">EN</option>
                   </select>
                 </div>
+              </div>
+            </div>
+            <div className="image-upload-area">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setfile(e.target.files[0])}
+                style={{ display: "none" }}
+                id="file-input"
+              />
+              <label htmlFor="file-input" style={{ cursor: "pointer" }}>
+                <div className="upload-button">
+                  <p> اضف صورة التصنيف </p>
+                </div>
+              </label>
+              <div className="uploaded-image">
+                <img
+                  style={{ width: "100%" }}
+                  src={file && URL.createObjectURL(file)}
+                />
               </div>
             </div>
             <div style={{ marginRight: "16px" }}>
@@ -154,11 +186,7 @@ const CategoryModal = ({ isColumn }) => {
           <Button variant="secondary" onClick={handleCategoryModalClose}>
             إلغاء
           </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={handleSubmit}
-          >
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
             إضافة التصنيف
           </Button>
         </Modal.Footer>

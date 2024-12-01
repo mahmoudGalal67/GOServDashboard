@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import HeaderComponent from "./component/HeaderComponent";
 import ProductHead from "./component/ProductHead";
 import ProductList from "./component/Products";
-import ProductListRow from "./component/ProductsListRow";
+
 import "./ProductPage.css";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
@@ -10,39 +10,37 @@ import Navbar from "../../components/Navbar";
 import { request } from "../../components/utils/Request";
 import { ProductContext } from "../../components/context/Product";
 
+import { ToastContainer } from "react-toastify";
+import DotLoader from "react-spinners/DotLoader";
+
 const ProductsPage = (props) => {
   const { dispatch, products } = useContext(ProductContext);
 
-  const [isProductListVisible, setProductListVisible] = useState(true);
+  const [loading, setloading] = useState(false);
 
-  const showProductList = () => {
-    setProductListVisible(true);
+  const override = {
+    position: "absolute",
+    inset: "50%",
   };
-
-  const hideProductList = () => {
-    setProductListVisible(false);
-  };
-
   useEffect(() => {
     const getProduts = async () => {
+      setloading(true);
       try {
         const { data } = await request({
           url: `/api/dashboard/products`,
         });
         dispatch({
           type: "fetchProducts",
-          payload: data,
+          payload: data.slice(0, 10),
         });
+        setloading(false);
       } catch (error) {
         console.log(error);
+        setloading(false);
       }
     };
     getProduts();
   }, []);
-
-  console.log("products", products);
-
-  const deleteProduct = (index) => {};
 
   return (
     <div
@@ -67,22 +65,28 @@ const ProductsPage = (props) => {
       >
         <div className="headerComponent" style={{ width: "98%" }}>
           <HeaderComponent />
-          <ProductHead
-            showProductList={showProductList}
-            hideProductList={hideProductList}
-          />
-          {isProductListVisible ? (
-            <ProductList
-              products={products}
-              onDelete={(index) => deleteProduct(index)}
+          <ProductHead />
+          {loading ? (
+            <DotLoader
+              color="#2ffff3"
+              size={60}
+              cssOverride={override}
+              loading={loading}
             />
-          ) : // <ProductListRow
-          //   products={products}
-          //   onDelete={(index) => deleteProduct(index)}
-          // />
-          null}
+          ) : (
+            <ProductList />
+          )}
         </div>
       </main>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+      />
     </div>
   );
 };

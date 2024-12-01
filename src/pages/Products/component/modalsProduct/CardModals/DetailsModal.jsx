@@ -1,34 +1,34 @@
 import React, { useState } from "react";
 import "../../ProductCard.css";
 import "../../ProductsRow.css";
-import { MdPhoto } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button, Form, Row, Col, Dropdown } from "react-bootstrap";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { MdDelete } from "react-icons/md";
-import { FaTrash, FaUpload } from "react-icons/fa";
+import { Modal, Button, Form } from "react-bootstrap";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import {
-  faSlidersH,
-  faChevronDown,
-  faInfinity,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
-const DetailsModal = ({ isColumn }) => {
-  const [productDetails, setProductDetails] = useState({
-    language: "AR",
-    price: 150,
-    quantity: 26,
-    description: "هدايا حسب الحدث",
-  });
+const DetailsModal = ({ isColumn, product, setUpdatedProduct }) => {
+  const modules = {
+    // #3 Add "image" to the toolbar
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProductDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
+  const handleInputChange = (value, name, lang) => {
+    setUpdatedProduct((prev) => ({
+      ...prev,
+      [name]: lang ? { en: value, ar: value } : value,
     }));
   };
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -64,7 +64,6 @@ const DetailsModal = ({ isColumn }) => {
     setActiveButton("productDetails");
   };
 
-  const [fileAction, setFileAction] = useState("upload");
   const [fileLink, setFileLink] = useState("");
 
   const handleFileActionChange = (id, action) => {
@@ -91,8 +90,6 @@ const DetailsModal = ({ isColumn }) => {
       { id: Date.now(), action: "upload", link: "" },
     ]);
   };
-
-  const [description, setDescription] = useState("");
 
   return (
     <>
@@ -134,19 +131,19 @@ const DetailsModal = ({ isColumn }) => {
           <Button
             style={{
               backgroundColor:
-              activeButton === "files" ? "#005379" : "transparent",
+                activeButton === "files" ? "#005379" : "transparent",
               color: activeButton === "files" ? "white" : "#000",
             }}
             onClick={handleFilesToggle}
             className="subheader-button"
           >
             الملفات المرفقة
-            <i className="sicon-list position-left ml-3" ></i>
+            <i className="sicon-list position-left ml-3"></i>
           </Button>
           <Button
             style={{
               backgroundColor:
-              activeButton === "customFields" ? "#005379" : "transparent",
+                activeButton === "customFields" ? "#005379" : "transparent",
               color: activeButton === "customFields" ? "white" : "#000",
             }}
             variant="outline-secondary"
@@ -157,12 +154,12 @@ const DetailsModal = ({ isColumn }) => {
             <i className="sicon-list-add position-left ml-3 mt-2"></i>
           </Button>
           <Button
-          style={{
-            backgroundColor:
-            activeButton === "productDetails" ? "#005379" : "transparent",
-            color: activeButton === "productDetails" ? "white" : "#000",
-            borderRadius:activeButton === "productDetails" ? "none" : "none",
-          }}
+            style={{
+              backgroundColor:
+                activeButton === "productDetails" ? "#005379" : "transparent",
+              color: activeButton === "productDetails" ? "white" : "#000",
+              borderRadius: activeButton === "productDetails" ? "none" : "none",
+            }}
             variant="outline-secondary"
             className="subheader-button"
             onClick={handleProductDetailsSectionToggle}
@@ -202,15 +199,21 @@ const DetailsModal = ({ isColumn }) => {
                   <label className="form-productDetails-label-class">
                     السعر المخفض
                   </label>
-                  <div className="form-control d-flex " style={{marginRight:"10px"}}>
-                     <i className="sicon-special-discount" style={{ color: "#aaa", marginTop: "5px" }}></i>
-                      <input
+                  <div
+                    className="form-control d-flex "
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i
+                      className="sicon-special-discount"
+                      style={{ color: "#aaa", marginTop: "5px" }}
+                    ></i>
+                    <input
                       type="text"
                       placeholder="السعر المخفض"
                       style={{
                         border: "none",
                         padding: "0px",
-                        marginRight:"4px",
+                        marginRight: "4px",
                       }}
                     />
                   </div>
@@ -219,35 +222,44 @@ const DetailsModal = ({ isColumn }) => {
                   <label className="form-productDetails-label-class">
                     نهاية التخفيض
                   </label>
-                
-                      <div className="form-control d-flex">
-                     <i className="sicon-calendar" style={{ color: "#aaa", marginTop: "5px" }}></i>
-                      <input
+
+                  <div className="form-control d-flex">
+                    <i
+                      className="sicon-calendar"
+                      style={{ color: "#aaa", marginTop: "5px" }}
+                    ></i>
+                    <input
                       type="text"
                       placeholder="نهاية التخفيض (اختباري)"
                       style={{
                         border: "none",
                         padding: "0px",
-                        marginRight:"4px",
+                        marginRight: "4px",
                       }}
                     />
                   </div>
                 </div>
               </div>
               <div className="form-group-flex-3col">
-                <div className="form-group-flex-col" >
+                <div className="form-group-flex-col">
                   <label className="form-productDetails-label-class">
                     رمز التخزين
                   </label>
-                      <div className="form-control d-flex" style={{marginRight:"10px"}}>
-                     <i className="sicon-barcode" style={{ color: "#aaa", marginTop: "5px" }}></i>
-                      <input
+                  <div
+                    className="form-control d-flex"
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i
+                      className="sicon-barcode"
+                      style={{ color: "#aaa", marginTop: "5px" }}
+                    ></i>
+                    <input
                       type="text"
                       placeholder="SUK رمز التخزين"
                       style={{
                         border: "none",
                         padding: "0px",
-                        marginRight:"3px",
+                        marginRight: "3px",
                       }}
                     />
                   </div>
@@ -256,31 +268,37 @@ const DetailsModal = ({ isColumn }) => {
                   <label className="form-productDetails-label-class">
                     GTIN
                   </label>
-                      <div className="form-control d-flex">
-                     <i className="sicon-barcode" style={{ color: "#aaa", marginTop: "5px" }}></i>
-                      <input
+                  <div className="form-control d-flex">
+                    <i
+                      className="sicon-barcode"
+                      style={{ color: "#aaa", marginTop: "5px" }}
+                    ></i>
+                    <input
                       type="text"
-                        placeholder="GTIN"
+                      placeholder="GTIN"
                       style={{
                         border: "none",
                         padding: "0px",
-                        marginRight:"3px",
+                        marginRight: "3px",
                       }}
                     />
                   </div>
                 </div>
                 <div className="form-group-flex-col">
                   <label className="form-productDetails-label-class">MPN</label>
-          
-                      <div className="form-control d-flex">
-                     <i className="sicon-barcode" style={{ color: "#aaa", marginTop: "4px"}}></i>
-                      <input
+
+                  <div className="form-control d-flex">
+                    <i
+                      className="sicon-barcode"
+                      style={{ color: "#aaa", marginTop: "4px" }}
+                    ></i>
+                    <input
                       type="text"
                       placeholder="MPN"
                       style={{
                         border: "none",
                         padding: "0px",
-                        marginRight:"3px",
+                        marginRight: "3px",
                       }}
                     />
                   </div>
@@ -293,9 +311,26 @@ const DetailsModal = ({ isColumn }) => {
                 >
                   تحديد الماركة التجارية
                 </label>
-                <div style={{border:"1px solid #ddd", width: "calc(98% - 50px)", marginRight:"30px",padding:"7px",borderRadius:"5px"}}>
-                  <i className="sicon-award-ribbon" style={{color:"#aaa"}}></i>
-                  <select style={{border:"none",marginRight:"0px",padding:"0px"}}>
+                <div
+                  style={{
+                    border: "1px solid #ddd",
+                    width: "calc(98% - 50px)",
+                    marginRight: "30px",
+                    padding: "7px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <i
+                    className="sicon-award-ribbon"
+                    style={{ color: "#aaa" }}
+                  ></i>
+                  <select
+                    style={{
+                      border: "none",
+                      marginRight: "0px",
+                      padding: "0px",
+                    }}
+                  >
                     <option>البحث عن الماركة</option>
                   </select>
                 </div>
@@ -332,11 +367,7 @@ const DetailsModal = ({ isColumn }) => {
                   </div>
 
                   <div className="selectproductDetailsClass">
-                    <select
-                      name="language"
-                      value={productDetails.language}
-                      onChange={handleChange}
-                    >
+                    <select name="language">
                       <option value="AR">AR</option>
                       <option value="EN">EN</option>
                     </select>
@@ -393,13 +424,27 @@ const DetailsModal = ({ isColumn }) => {
                 >
                   تحديد كمية المنتج
                 </label>
-                <div style={{border:"1px solid #ddd", width: "calc(98% - 50px)", marginRight:"30px",padding:"7px",borderRadius:"5px"}}>
-                  <i className="sicon-box" style={{color:"#aaa"}}></i>
-                  <select style={{border:"none",marginRight:"0px",padding:"0px"}}>
-                  <option value="">تحديد كمية المنتج</option>
-                  <option value="enabled">تفعيل خيار تحديد الكمية</option>
-                  <option value="rules">قوانين تحديد الكمية</option>
-                  <option value="disable">تعطيل خيار تحديد الكمية</option>
+                <div
+                  style={{
+                    border: "1px solid #ddd",
+                    width: "calc(98% - 50px)",
+                    marginRight: "30px",
+                    padding: "7px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <i className="sicon-box" style={{ color: "#aaa" }}></i>
+                  <select
+                    style={{
+                      border: "none",
+                      marginRight: "0px",
+                      padding: "0px",
+                    }}
+                  >
+                    <option value="">تحديد كمية المنتج</option>
+                    <option value="enabled">تفعيل خيار تحديد الكمية</option>
+                    <option value="rules">قوانين تحديد الكمية</option>
+                    <option value="disable">تعطيل خيار تحديد الكمية</option>
                   </select>
                 </div>
               </div>
@@ -410,12 +455,26 @@ const DetailsModal = ({ isColumn }) => {
                 >
                   قنوات عرض المنتج
                 </label>
-                <div style={{border:"1px solid #ddd", width: "calc(98% - 50px)", marginRight:"30px",padding:"7px",borderRadius:"5px"}}>
-                  <i className="sicon-devices" style={{color:"#aaa"}}></i>
-                  <select style={{border:"none",marginRight:"0px",padding:"0px"}}>
-                  <option value="">قم بتحديد قنوات عرض المتجر</option>
-                  <option value="enabled">اظهار في موقع المتجر</option>
-                  <option value="rules">اظهار في تطبيق المتجر</option>
+                <div
+                  style={{
+                    border: "1px solid #ddd",
+                    width: "calc(98% - 50px)",
+                    marginRight: "30px",
+                    padding: "7px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <i className="sicon-devices" style={{ color: "#aaa" }}></i>
+                  <select
+                    style={{
+                      border: "none",
+                      marginRight: "0px",
+                      padding: "0px",
+                    }}
+                  >
+                    <option value="">قم بتحديد قنوات عرض المتجر</option>
+                    <option value="enabled">اظهار في موقع المتجر</option>
+                    <option value="rules">اظهار في تطبيق المتجر</option>
                   </select>
                 </div>
               </div>
@@ -453,12 +512,28 @@ const DetailsModal = ({ isColumn }) => {
                     المنتج خاضع لضريبة{" "}
                   </label>
                 </div>
+                <div className="form-control mt-2">
+                  <input
+                    type="text"
+                    placeholder=" وصف المنتج"
+                    value={product?.description.en}
+                    onChange={(e) =>
+                      handleInputChange(e.target.value, "description", true)
+                    }
+                    style={{
+                      border: "none",
+                      padding: "0px",
+                      marginRight: "4px",
+                    }}
+                  />
+                </div>
               </form>
               <div className="form-group" style={{ marginRight: "43px" }}>
                 <ReactQuill
-                  value={description}
-                  onChange={setDescription}
-                  placeholder="وصف المنتج"
+                  modules={modules}
+                  value={product?.details.en}
+                  onChange={(e) => handleInputChange(e, "details", true)}
+                  placeholder="تفاصيل المنتج"
                   style={{
                     width: "calc(98% - 50px)",
                     border: "1px solid rgb(225 218 218)",
@@ -492,18 +567,20 @@ const DetailsModal = ({ isColumn }) => {
                   width: "90%",
                   marginRight: "40px",
                   marginTop: "-2px",
-                  
                 }}
               >
-                <div style={{width:"90%"}}>
-                  <i className="sicon-tag" style={{marginRight:"13px",color:"#aaa"}}></i>
+                <div style={{ width: "90%" }}>
+                  <i
+                    className="sicon-tag"
+                    style={{ marginRight: "13px", color: "#aaa" }}
+                  ></i>
                   <input
                     type="text"
                     className="text-input"
                     placeholder=" ادخل الوسيم هنا ,ثم اضغط زر اضافة او اضغط Enter"
                   />
                 </div>
-              
+
                 <button className="input-button">
                   <i className="icon-class">اضافة</i>
                 </button>
@@ -545,20 +622,22 @@ const DetailsModal = ({ isColumn }) => {
                   عنوان صفحة المنتج (Page Title)
                 </label>
                 <div style={{ marginRight: "41px", marginTop: "15px" }}>
-                  <div style={{
+                  <div
+                    style={{
                       width: "90%",
                       border: "1px solid rgb(225 218 218)",
                       padding: "2px 8px",
-                      backgroundColor:"#fff",
-                    }}> 
-                  <i className="sicon-image-carousel text-gray-500"></i>
-                  <input
-                    type="text"
-                    placeholder="عنوان صفحة المنتج"
-                    style={{
-                      border: "none",
+                      backgroundColor: "#fff",
                     }}
-                  />
+                  >
+                    <i className="sicon-image-carousel text-gray-500"></i>
+                    <input
+                      type="text"
+                      placeholder="عنوان صفحة المنتج"
+                      style={{
+                        border: "none",
+                      }}
+                    />
                   </div>
                   <p style={{ marginRight: "40px" }}>
                     اسم المنتج :
@@ -581,20 +660,22 @@ const DetailsModal = ({ isColumn }) => {
                   رابط صفحة المنتج (SEO Page URL)
                 </label>
                 <div style={{ marginRight: "41px", marginTop: "15px" }}>
-                    <div style={{
+                  <div
+                    style={{
                       width: "90%",
                       border: "1px solid rgb(225 218 218)",
                       padding: "2px 8px",
-                      backgroundColor:"#fff",
-                    }}> 
-                  <i className="sicon-link text-gray-500"></i>
-                  <input
-                    type="text"
-                    placeholder="رابط صفحة المنتج"
-                    style={{
-                      border: "none",
+                      backgroundColor: "#fff",
                     }}
-                  />
+                  >
+                    <i className="sicon-link text-gray-500"></i>
+                    <input
+                      type="text"
+                      placeholder="رابط صفحة المنتج"
+                      style={{
+                        border: "none",
+                      }}
+                    />
                   </div>
                   <p style={{ marginRight: "40px" }}>
                     اسم المنتج :
@@ -617,24 +698,28 @@ const DetailsModal = ({ isColumn }) => {
                   وصف صفحة المنتج (Page Description)
                 </label>
                 <div style={{ marginRight: "41px", marginTop: "15px" }}>
-                    <div style={{
+                  <div
+                    style={{
                       width: "90%",
                       border: "1px solid rgb(225 218 218)",
                       padding: "8px",
-                      backgroundColor:"#fff",
-                      display:"flex",
-                
-                    }}> 
-                  <i className="sicon-content text-gray-500" style={{marginTop:"7px",marginLeft:"5px"}}></i>
-                  <textarea
-                    placeholder="وصف صفحة المنتج"
-                    style={{
-                      border: "none",
-                      height: "100px",
-                      width:"100%",
-                      outline: "none",
+                      backgroundColor: "#fff",
+                      display: "flex",
                     }}
-                  />
+                  >
+                    <i
+                      className="sicon-content text-gray-500"
+                      style={{ marginTop: "7px", marginLeft: "5px" }}
+                    ></i>
+                    <textarea
+                      placeholder="وصف صفحة المنتج"
+                      style={{
+                        border: "none",
+                        height: "100px",
+                        width: "100%",
+                        outline: "none",
+                      }}
+                    />
                   </div>
                   <p style={{ marginRight: "20px" }}>
                     اسم المنتج :
@@ -691,21 +776,20 @@ const DetailsModal = ({ isColumn }) => {
                       borderRadius: "10px",
                     }}
                   >
-                    <div className="InputDetailsClass" style={{ width: "80%"}}>
-                      <div style={{display:"flex"}}>
-                      <i className="sicon-type-square mt-3 mr-4"></i>
-                      <input
-                        type="text"
-                        placeholder="اسم الملف"
-                        required
-                        style={{
-                          width: "100%",
-                          outline: "none",
-                          border: "none",
-                        }}
-                      />
+                    <div className="InputDetailsClass" style={{ width: "80%" }}>
+                      <div style={{ display: "flex" }}>
+                        <i className="sicon-type-square mt-3 mr-4"></i>
+                        <input
+                          type="text"
+                          placeholder="اسم الملف"
+                          required
+                          style={{
+                            width: "100%",
+                            outline: "none",
+                            border: "none",
+                          }}
+                        />
                       </div>
-                    
                     </div>
                     <div
                       className="selectDetailsClass"
@@ -713,8 +797,6 @@ const DetailsModal = ({ isColumn }) => {
                     >
                       <select
                         name="language"
-                        value={productDetails.language}
-                        onChange={handleChange}
                         style={{
                           width: "100%",
                           outline: "none",
@@ -739,27 +821,25 @@ const DetailsModal = ({ isColumn }) => {
                     }}
                   >
                     <div style={{ width: "30%" }}>
-                      <div style={{display:"flex"}}>
-                      <i className="sicon-cloud-upload selected-method-icon mt-3 mr-5"></i>
-                      <select
-                        value={section.action}
-                        onChange={(e) =>
-                          handleFileActionChange(section.id, e.target.value)
-                        }
-                        style={{
-                          width: "70%",
-                          height: "50px",
-                          borderRadius: "10px",
-                          outline: "none",
-                          border: "none",
-                      
-                        }}
-                      >
-                        <option value="upload">رفع الملف</option>
-                        <option value="link">رابط الملف</option>
-                      </select>
+                      <div style={{ display: "flex" }}>
+                        <i className="sicon-cloud-upload selected-method-icon mt-3 mr-5"></i>
+                        <select
+                          value={section.action}
+                          onChange={(e) =>
+                            handleFileActionChange(section.id, e.target.value)
+                          }
+                          style={{
+                            width: "70%",
+                            height: "50px",
+                            borderRadius: "10px",
+                            outline: "none",
+                            border: "none",
+                          }}
+                        >
+                          <option value="upload">رفع الملف</option>
+                          <option value="link">رابط الملف</option>
+                        </select>
                       </div>
-                    
                     </div>
 
                     {section.action === "upload" && (
@@ -782,7 +862,7 @@ const DetailsModal = ({ isColumn }) => {
                               paddingRight: "14px",
                             }}
                           >
-                          اختر ملف   .....
+                            اختر ملف .....
                           </Form.Label>
                         </div>
                         <div
@@ -812,10 +892,10 @@ const DetailsModal = ({ isColumn }) => {
                               border: "none",
                               marginTop: "5px",
                               backgroundColor: "rgb(4 147 227 / 94%)",
-                              color:"#fff",
+                              color: "#fff",
                             }}
                           >
-                          <i className="glyphicon glyphicon-folder-open"></i>
+                            <i className="glyphicon glyphicon-folder-open"></i>
                             استعراض
                           </Form.Label>
                         </div>
@@ -871,7 +951,10 @@ const DetailsModal = ({ isColumn }) => {
                   </Button>
                 </div>
               ))}
-              <button onClick={handleAddFileSection} className="addNewOptionDetails">
+              <button
+                onClick={handleAddFileSection}
+                className="addNewOptionDetails"
+              >
                 <span className="plus-icon">+</span>
               </button>
             </div>
