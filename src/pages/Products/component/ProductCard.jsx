@@ -180,9 +180,9 @@ const ProductCard = ({ product, categories, setcategories }) => {
         payload: { newproduct: data },
       });
     } catch (error) {
-      toast.error(error.response.data.message);
       console.log(error);
       setloading(false);
+      toast.error(error.response.data.message);
     }
   };
 

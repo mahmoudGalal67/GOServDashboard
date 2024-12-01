@@ -14,6 +14,9 @@ const CategoryModal = ({ isColumn, setcategories }) => {
   const [categoryNameEN, setCategoryNameEN] = useState("");
   const [file, setfile] = useState(null);
 
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
   const handleCategoryModalClose = () => setShowCategoryModal(false);
   const handleCategoryModalShow = () => setShowCategoryModal(true);
 
@@ -49,6 +52,7 @@ const CategoryModal = ({ isColumn, setcategories }) => {
     };
 
     try {
+      setloading(true);
       const response = await request({
         url: "api/dashboard/categories",
         method: "POST",
@@ -62,9 +66,11 @@ const CategoryModal = ({ isColumn, setcategories }) => {
         alert("Category added successfully");
         setcategories((prev) => [...prev, response.data]);
         setShowCategoryModal(false);
+        setloading(false);
       }
     } catch (error) {
       console.error("Error adding category", error);
+      setloading(false);
     }
   };
 
@@ -187,7 +193,7 @@ const CategoryModal = ({ isColumn, setcategories }) => {
             إلغاء
           </Button>
           <Button variant="primary" type="submit" onClick={handleSubmit}>
-            إضافة التصنيف
+            {loading ? "loading ..." : "إضافة التصنيف"}
           </Button>
         </Modal.Footer>
       </Modal>
