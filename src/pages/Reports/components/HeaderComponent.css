@@ -3,11 +3,11 @@
   align-items: center;
   font-size: 16px;
   color: gray;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .nav-item-reports,
-.nav-item-home-reports{
+.nav-item-home-reports {
   margin: 0 5px;
 }
 .nav-icon-reports {
@@ -15,6 +15,6 @@
   font-size: 20px;
 }
 .nav-item-home-reports,
-.nav-icon-reports{
-  color: #a6abc8 !important;
+.nav-icon-reports {
+  color: var(--main-color) !important;
 }

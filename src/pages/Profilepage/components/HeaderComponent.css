@@ -3,11 +3,11 @@
   align-items: center;
   font-size: 16px;
   color: gray;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .nav-item-profilepage,
-.nav-item-home-profilepage{
+.nav-item-home-profilepage {
   margin: 0 5px;
 }
 .nav-icon-profilepage {
@@ -15,6 +15,6 @@
   font-size: 20px;
 }
 .nav-item-home-profilepage,
-.nav-icon-profilepage{
-  color: #a6abc8 !important;
+.nav-icon-profilepage {
+  color: var(--main-color) !important;
 }

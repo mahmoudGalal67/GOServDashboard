@@ -34,7 +34,7 @@ export default function Wallet({ darkMode, setDarkMode }) {
           }}
         >
           <HeaderComponent />
-          <main className="ms-6 mt-3">
+          <main className="mt-3 mr-0">
             <Vervication />
             <Types />
             <BillingSettings />

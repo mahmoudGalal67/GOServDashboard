@@ -11,8 +11,7 @@ import {
 import "swiper/css";
 import "./SwiperOrders.css";
 import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css/pagination"; 
-
+import "swiper/css/pagination";
 
 const SwiperOrders = ({ onCardClick, selectedIndex }) => {
   const Orderdata = [
@@ -85,16 +84,33 @@ const SwiperOrders = ({ onCardClick, selectedIndex }) => {
   ];
 
   return (
-  <Swiper
-    spaceBetween={0}
-    slidesPerView={5}
-    loop={true}
-    pagination={{
-      clickable: true,
-    }}
-    className="mySwiper"
-    grabCursor={true}
-    onSlideChange={(swiper) => onCardClick(swiper.activeIndex)}
+    <Swiper
+      spaceBetween={10}
+      slidesPerView={2}
+      breakpoints={{
+        // when window width is >= 640px
+        400: {
+          width: 640,
+          slidesPerView: 2,
+        },
+        // when window width is >= 768px
+        768: {
+          width: 768,
+          slidesPerView: 3,
+        },
+        980: {
+          width: 768,
+          slidesPerView: 5,
+        },
+      }}
+      loop={true}
+      pagination={{
+        clickable: true,
+      }}
+      className="mySwiper"
+      style={{ marginTop: "25px" }}
+      grabCursor={true}
+      onSlideChange={(swiper) => onCardClick(swiper.activeIndex)}
     >
       {Orderdata.map((item, index) => (
         <SwiperSlide key={index}>

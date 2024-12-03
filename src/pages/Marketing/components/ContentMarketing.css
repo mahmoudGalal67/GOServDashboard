@@ -11,8 +11,9 @@
 
 .contentmarketing-cards {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 16px;
-  justify-content: flex-start;
 }
 
 .contentmarketing-card {
@@ -21,12 +22,11 @@
   border-radius: 8px;
   text-align: center;
   background-color: #f8f9fa;
-  width:24.5%;
 }
 
-.icon-contentmarketing{
+.icon-contentmarketing {
   font-size: 32px;
-  color: #a6abc8;
+  color: var(--main-color);
   display: block;
   margin-bottom: 5px;
 }
@@ -40,5 +40,5 @@
 .contentmarketing-card-description {
   font-size: 10px;
   color: #6c757d;
-  text-align:center;
+  text-align: center;
 }

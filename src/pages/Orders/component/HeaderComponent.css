@@ -6,7 +6,7 @@
 }
 
 .nav-item-orders,
-.nav-item-home-orders{
+.nav-item-home-orders {
   margin: 0 5px;
 }
 .nav-icon-orders {
@@ -15,5 +15,5 @@
 }
 .nav-item-home-orders,
 .nav-icon-orders {
-  color: #a6abc8 !important;
+  color: var(--main-color) !important;
 }

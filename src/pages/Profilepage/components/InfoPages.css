@@ -4,7 +4,7 @@
   padding: 16px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
 .Infopages-header {
@@ -13,8 +13,7 @@
   padding: 8px 16px;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color:#fcfcfc;
-
+  background-color: #fcfcfc;
 }
 
 .Infopages-count {
@@ -43,7 +42,6 @@
   font-size: 1.5rem;
   color: #888;
   cursor: pointer;
-
 }
 
 .Infopages-toggle-container {
@@ -93,7 +91,7 @@
 }
 
 input:checked + .Infopages-slider {
-  background-color: #a6abc8;
+  background-color: var(--main-color);
 }
 
 input:checked + .Infopages-slider:before {
@@ -103,7 +101,9 @@ input:checked + .Infopages-slider:before {
 .Infopages-round {
   border-radius: 34px;
 }
-.Infopages-popup1, .Infopages-popup2,.Infopages-popup3 {
+.Infopages-popup1,
+.Infopages-popup2,
+.Infopages-popup3 {
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -114,22 +114,22 @@ input:checked + .Infopages-slider:before {
   font-size: 0.9rem;
   color: #333;
   z-index: 10;
-  cursor:pointer;
+  cursor: pointer;
 }
 .Infopages-popup1 {
   position: absolute;
   left: 30px;
-  top:20px;
+  top: 20px;
 }
 .Infopages-popup2 {
   position: absolute;
   left: 30px;
-  top:70px;
+  top: 70px;
 }
 .Infopages-popup3 {
   position: absolute;
   left: 30px;
-  top:130px;
+  top: 130px;
 }
 .copy-icon {
   font-size: 1.2rem;

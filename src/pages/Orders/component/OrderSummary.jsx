@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
-import './OrderSummary.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./OrderSummary.css";
 import { Modal, Form } from "react-bootstrap";
 
 const OrderSummary = ({ selectedIndex, showDetails }) => {
   const data = [
-    { title: 'جاري التوصيل', count: 0 },
-    { title: 'تم التنفيذ', count: 0 },
-    { title: 'قيد التنفيذ', count: 0 },
-    { title: 'بانتظار المراجعة', count: 0 },
-    { title: 'بانتظار الدفع', count: 0 },
-    { title: 'محذوف', count: 0 },
+    { title: "جاري التوصيل", count: 0 },
+    { title: "تم التنفيذ", count: 0 },
+    { title: "قيد التنفيذ", count: 0 },
+    { title: "بانتظار المراجعة", count: 0 },
+    { title: "بانتظار الدفع", count: 0 },
+    { title: "محذوف", count: 0 },
   ];
 
   const selectedOrder = selectedIndex !== null ? data[selectedIndex] : null;
 
-
   const handleShowReleaseModal = () => setShowReleaseModal(true);
   const handleCloseReleaseModal = () => setShowReleaseModal(false);
   const [showReleaseModal, setShowReleaseModal] = useState(false);
-
 
   const handleMouseEnter2 = () => {
     setShowExportDropdown(true);
@@ -43,7 +41,11 @@ const OrderSummary = ({ selectedIndex, showDetails }) => {
     <div className="order-summary">
       <div className="order-header">
         <div className="order-header-title">
-          <input type="checkbox" className="order-header-checkbox mx-3" disabled />
+          <input
+            type="checkbox"
+            className="order-header-checkbox mx-3"
+            disabled
+          />
           <h2>الطلبات </h2>
           {showDetails && selectedOrder ? (
             <div className="order-info">
@@ -55,7 +57,7 @@ const OrderSummary = ({ selectedIndex, showDetails }) => {
           ) : null}
         </div>
         <button className="order-edit-button" onClick={handleShowReleaseModal}>
-          <i className="sicon-magic-wand flip-x" ></i> تحرير سريع
+          <i className="sicon-magic-wand flip-x"></i> تحرير سريع
         </button>
       </div>
       <div className="order-item">
@@ -65,7 +67,7 @@ const OrderSummary = ({ selectedIndex, showDetails }) => {
           </div>
           <div className="order-details">
             {showDetails && selectedOrder ? (
-              <p style={{color:"black"}}>لا توجد طلبات محددة</p>
+              <p style={{ color: "black" }}>لا توجد طلبات محددة</p>
             ) : (
               <p>
                 <span> #128487450 </span>
@@ -76,29 +78,37 @@ const OrderSummary = ({ selectedIndex, showDetails }) => {
           </div>
         </div>
 
-        {showDetails && selectedOrder ? (
-          null
-        ) : <div className="order-item-left">
-          <div className="order-item-left-1">
-            <p style={{color:"black"}}>SAR 0</p>
+        {showDetails && selectedOrder ? null : (
+          <div className="order-item-left">
+            <div className="order-item-left-1">
+              <p style={{ color: "black" }}>SAR 0</p>
+            </div>
+            <div className="order-item-left-2">
+              <p>منذ اليوم</p>
+            </div>
           </div>
-          <div className="order-item-left-2">
-            <p>منذ اليوم</p>
-          </div>
-        </div>}
+        )}
       </div>
-      
+
       <Modal
         show={showReleaseModal}
         onHide={handleCloseReleaseModal}
         dialogClassName="left-aligned-service-release"
       >
         <Modal.Body>
-          <div className="dropdown-item-service"
+          <div
+            className="dropdown-item-service"
             onMouseEnter={handleMouseEnter2}
-            onMouseLeave={handleMouseLeave2}>
+            onMouseLeave={handleMouseLeave2}
+          >
             <div className="text-container-service">
-              <p><i className="sicon-keyboard_arrow_left" style={{ position: "absolute", left: 2 }}></i> تعديل حالة الطلب</p>
+              <p>
+                <i
+                  className="sicon-keyboard_arrow_left"
+                  style={{ position: "absolute", left: 2 }}
+                ></i>{" "}
+                تعديل حالة الطلب
+              </p>
             </div>
             <div className="icon-container-drop">
               <i className="sicon-inbox-multi"></i>
@@ -184,8 +194,6 @@ const OrderSummary = ({ selectedIndex, showDetails }) => {
           </div>
         </Modal.Body>
       </Modal>
-
-      
     </div>
   );
 };

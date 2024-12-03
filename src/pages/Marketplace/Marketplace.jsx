@@ -40,7 +40,7 @@ export default function Marketplace({ darkMode, setDarkMode }) {
         >
           <div className=" w-full">
             <HeaderComponent />
-            <div className="flex flex-row justify-center items-center p-2 border rounded-md w-[80%]  m-auto my-4">
+            <div className="flex lg:flex-row flex-col justify-center items-center p-2 border rounded-md w-[80%]  m-auto my-4">
               <div className="flex flex-col items-center gap-2 border-e-2 p-6 w-full">
                 <figure>
                   <img src={sallastar} alt="sallastar" />
@@ -135,7 +135,7 @@ export default function Marketplace({ darkMode, setDarkMode }) {
             </div>
 
             <footer className="border rounded-md my-2 ">
-              <div className="flex flex-row justify-between items-center  border-b-2 ">
+              <div className="flex flex-row flex-wrap justify-around items-center  border-b-2 ">
                 <div className="flex flex-row gap-2 items-center p-3">
                   <div className="bg-green-300 rounded-full p-2">
                     <FaGift className="text-2xl" />

@@ -3,11 +3,11 @@
   align-items: center;
   font-size: 16px;
   color: gray;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .nav-item-influncers,
-.nav-item-home-influncers{
+.nav-item-home-influncers {
   margin: 0 5px;
 }
 .nav-icon-influncers {
@@ -15,6 +15,6 @@
   font-size: 20px;
 }
 .nav-item-home-influncers,
-.nav-icon-influncers{
-  color: #a6abc8 !important;
+.nav-icon-influncers {
+  color: var(--main-color) !important;
 }

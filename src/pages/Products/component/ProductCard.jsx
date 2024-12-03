@@ -324,9 +324,7 @@ const ProductCard = ({ product, categories, setcategories }) => {
               </div>
               {unlimited ? (
                 <div className="numberOfQuantity">
-                  <p style={{ color: "black", fontSize: "10px" }}>
-                    كمية غير محدودة
-                  </p>
+                  <p style={{ fontSize: "10px" }}>كمية غير محدودة</p>
                 </div>
               ) : (
                 <OptionsModal

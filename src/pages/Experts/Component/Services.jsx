@@ -12,7 +12,7 @@ import "./style.css";
 export default function Services() {
   return (
     <>
-      <services className="flex my-4 text-[#57578e] cursor-pointer gap-3 xl:flex-row  flex-wrap flex-col m-4">
+      <services className="flex my-4 text-[#067DD3] cursor-pointer gap-3 xl:flex-row  flex-wrap flex-col m-4">
         <OverlayTrigger
           className="bg-red-900 parent"
           placement="top"

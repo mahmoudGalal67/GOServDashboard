@@ -1,4 +1,4 @@
-.nav-items-marketplace{
+.nav-items-marketplace {
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -6,7 +6,7 @@
 }
 
 .nav-item-marketplace,
-.nav-item-home-marketplace{
+.nav-item-home-marketplace {
   margin: 0 5px;
 }
 .nav-icon-marketplace {
@@ -14,6 +14,6 @@
   font-size: 20px;
 }
 .nav-item-home-marketplace,
-.nav-icon-marketplace{
-  color: #a6abc8 !important;
+.nav-icon-marketplace {
+  color: var(--main-color) !important;
 }

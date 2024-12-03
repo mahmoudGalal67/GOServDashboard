@@ -7,25 +7,26 @@
   color: #6c757d;
   margin-bottom: 16px;
 }
-.AdvancedTools-cards{
+.AdvancedTools-cards {
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
   gap: 16px;
-  justify-content: flex-start;
 }
 .AdvancedTools-card {
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   padding: 20px;
-  width:24.5%;
-  text-align: center; 
+  text-align: center;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow:hidden;
+  overflow: hidden;
 }
 .AdvancedTools-icon {
   font-size: 2rem;
-  color: #a6abc8;
+  color: var(--main-color);
   margin-bottom: 0.5rem;
 }
 
@@ -39,7 +40,7 @@
   color: #888;
   font-size: 0.7rem;
   margin-top: 0.5rem;
-  text-align:center;
+  text-align: center;
 }
 
 .AdvancedTools-new-badge {
@@ -54,4 +55,3 @@
   transform: rotate(-45deg);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-

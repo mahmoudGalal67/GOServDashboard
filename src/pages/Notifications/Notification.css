@@ -1,5 +1,5 @@
-.notifications-container{
-  width:98%;
+.notifications-container {
+  width: 98%;
 }
 
 .notifications-container-box {
@@ -11,17 +11,15 @@
 .notifications-container-box h4 {
   text-align: right;
   font-size: 20px;
-  background-color:#fcfcfc;
+  background-color: #fcfcfc;
   padding: 20px;
-
 }
 
 .notifications-table {
   width: 100%;
   border-collapse: collapse;
   text-align: right;
-  border:none !important;
-  
+  border: none !important;
 }
 .notifications-table input[type="checkbox"] {
   width: 0;
@@ -41,7 +39,7 @@
 }
 
 .notifications-table input[type="checkbox"] + label::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -53,15 +51,15 @@
 }
 
 .notifications-table input[type="checkbox"]:checked + label {
-   background-color: #a6abc8;;
+  background-color: var(--main-color);
 }
 
 .notifications-table input[type="checkbox"]:checked + label::after {
   transform: translateX(24px);
 }
 
-.notifications-table tr{
-  border-bottom:1px solid #f8f8f8;;
+.notifications-table tr {
+  border-bottom: 1px solid #f8f8f8;
 }
 .notifications-table th,
 .notifications-table td {

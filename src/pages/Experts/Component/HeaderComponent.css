@@ -6,7 +6,7 @@
 }
 
 .nav-item-experts,
-.nav-item-home-experts{
+.nav-item-home-experts {
   margin: 0 5px;
 }
 .nav-icon-experts {
@@ -14,6 +14,6 @@
   font-size: 20px;
 }
 .nav-item-home-experts,
-.nav-icon-experts{
-  color: #a6abc8 !important;
+.nav-icon-experts {
+  color: var(--main-color) !important;
 }

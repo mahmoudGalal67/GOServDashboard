@@ -28,7 +28,7 @@
 }
 
 .btn-add-order {
-  background-color: #a6abc8 !important;
+  background-color: var(--main-color) !important;
   border-radius: 20px !important;
   color: #fff !important;
   border-color: #b2cdf4 !important;
@@ -169,4 +169,3 @@
 .dropdown-export-content p:hover {
   background-color: #f0f0f0;
 }
-

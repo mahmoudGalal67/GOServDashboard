@@ -35,14 +35,14 @@ export default function Sweply({ darkMode, setDarkMode }) {
             overflowX: "hidden",
           }}
         >
-        
           <div className="mx-4 w-full">
-            <HeaderComponent/>
+            <HeaderComponent />
             <div className="flex flex-row justify-between w-full p-1 mt-2 items-center">
               <Dropdown className="text-center " dir="rtl">
                 <Dropdown.Toggle
-                  className="text-black hover:bg-green-300 focus:bg-green-400 flex flow-row items-center gap-2 border  rounded-pill bg-green-200"
+                  className="text-black hover:bg-green-300 focus:bg-green-400 flex flow-row items-center gap-2 border  rounded-pill"
                   id="dropdown-basic"
+                  style={{ background: "067dd3" }}
                 >
                   <FaPlus />
                   انشاء حملة جديدة

@@ -1,6 +1,6 @@
 .RowHeadClass {
   /* width: 98%; */
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 .RowFlex {
@@ -65,7 +65,7 @@
 
 .save-button {
   width: 100%;
-  background-color: #a6abc8;
+  background-color: var(--main-color);
   color: #000;
   padding: 10px;
   border: none;
@@ -184,23 +184,23 @@
   color: #888;
 }
 
-@media(max-width:1250px){
+@media (max-width: 1250px) {
   .RowFlex .col-1 {
     width: 5vw;
   }
-  
+
   .RowFlex .col-2 {
     width: 10vw;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .RowFlex .col-3 {
     width: 40vw;
     margin-top: 25px;
   }
-  
+
   .RowFlex .col-4 {
     width: 18vw;
     display: flex;
@@ -209,23 +209,23 @@
     margin-top: -20px;
   }
 }
-@media(max-width:1152px){
+@media (max-width: 1152px) {
   .RowFlex .col-1 {
     width: 4vw;
   }
-  
+
   .RowFlex .col-2 {
     width: 7vw;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .RowFlex .col-3 {
     width: 38vw;
     margin-top: 25px;
   }
-  
+
   .RowFlex .col-4 {
     width: 18vw;
     display: flex;

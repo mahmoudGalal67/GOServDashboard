@@ -449,7 +449,7 @@ i.sicon-dollar-coin-stack {
 .CategoryModal .modal-header,
 .DetailsModalClass .modal-header,
 .notification .modal-header {
-  background-color: #b4d4d2ab;
+  background-color: var(--main-color);
   color: black;
 }
 .addnewphoto .close-button,
@@ -511,7 +511,7 @@ i.sicon-dollar-coin-stack {
 }
 
 .input-button {
-  background-color: #b4d4d2ab;
+  background-color: var(--main-color);
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -679,7 +679,8 @@ button:focus {
 }
 
 .toggleheader-section .right-toggleHeader {
-  width: 50vw;
+  display: flex;
+  align-items: center;
   border: 1px solid #ddd;
   background-color: #ffff;
 }
@@ -700,10 +701,6 @@ button:focus {
 .toggleheader-section .left-toggleHeader .iconSelectclass {
   width: 70%;
   margin-right: 10px;
-}
-
-.toggleheader-section .left-toggleHeader button {
-  width: 15%;
 }
 
 .option-input {
@@ -946,7 +943,6 @@ button:focus {
 }
 
 .custom-select {
-  width: 30%;
   padding: 7px;
   border: 1px solid #9fbfe3;
   border-radius: 5px;

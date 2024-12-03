@@ -11,8 +11,9 @@
 
 .discounts-cards {
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   gap: 16px;
-  justify-content: flex-start;
 }
 
 .discount-card {
@@ -21,13 +22,12 @@
   border-radius: 8px;
   text-align: center;
   background-color: #f8f9fa;
-  width:24.5%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.icon-marketingDiscount{
+.icon-marketingDiscount {
   font-size: 32px;
-  color: #a6abc8;
+  color: var(--main-color);
   display: block;
   margin-bottom: 5px;
 }
@@ -41,5 +41,5 @@
 .marketingDiscount-card-description {
   font-size: 10px;
   color: #6c757d;
-  text-align:center;
+  text-align: center;
 }

@@ -39,10 +39,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           paddingRight: "18px",
         }}
       >
-        <img src="logo.svg" alt="" style={{ width: "80px" }} />
+        <img src="logo.svg" className="logo" alt="" style={{ width: "80px" }} />
       </div>
 
-      <div className="nav-wrapper px-10 flex justify-between items-center flex-grow">
+      <div className="nav-wrapper md:px-10 pr-4 flex justify-between items-center flex-grow">
         <div
           className="search-wrapper flex items-center relative overflow-hidden bg-white"
           style={{
@@ -63,7 +63,6 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               border: "1px solid #eee",
               color: "#999",
               fontSize: "14px",
-              padding: "8px 20px",
               position: "relative",
               backgroundColor: darkMode ? "#272626" : "#FFFFFF",
             }}
@@ -79,15 +78,8 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           </Tooltip>
 
           <Dropdown />
-          <button
-            className="flex items-center justify-center"
-            style={{
-              backgroundColor: "#f1f2f7",
-              height: "38px",
-              width: "48px",
-            }}
-          >
-            <IoSearch />
+          <button className="search-icon flex items-center justify-center">
+            <IoSearch color="#067DD3" />
           </button>
         </div>
 
@@ -96,7 +88,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <button
               className="hidden lg:flex"
               style={{
-                border: "1px solid #a6abc8",
+                border: "1px solid #067DD3",
                 borderRadius: "50%",
                 cursor: "pointer",
                 width: "38px",
@@ -113,8 +105,8 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <button
               className="mx-1 lg:mx-0"
               style={{
-                backgroundColor: darkMode ? "#baf3e6" : "#fcfcfc",
-                border: "1px solid #a6abc8",
+                backgroundColor: darkMode ? "#067DD3" : "#fcfcfc",
+                border: "1px solid #067DD3",
                 color: "black",
                 borderRadius: "50%",
                 cursor: "pointer",

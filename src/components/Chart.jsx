@@ -57,7 +57,7 @@ const LineChart = () => {
         overflow: "hidden",
         // width: "50%",
         maxHeight: "300px",
-        backgroundColor: "#a6abc8",
+        backgroundColor: "#067DD3",
         display: "flex",
         alignItems: "center",
         borderBottomLeftRadius: "8px",

@@ -39,7 +39,7 @@ const Sidebar = () => {
           top: "10px",
           right: "10px", // Adjust the button position based on the sidebar state
           zIndex: 100000000000,
-          background: "#57578e",
+          background: "#067DD3",
           color: "#fff",
           padding: "6px",
           borderRadius: "50%",
@@ -112,7 +112,7 @@ const Sidebar = () => {
         </p>
         <div
           style={{
-            border: "1px solid #57578e",
+            border: "1px solid #067DD3",
             borderRadius: "25px",
             width: "fit-content",
             fontSize: "14px",
@@ -141,10 +141,9 @@ const Sidebar = () => {
 
           <button
             style={{
-              backgroundColor: "#57578e",
+              backgroundColor: "#067DD3",
               height: "30.6px",
               padding: "4px 12px",
-              color: "#a6abc8",
               fontSize: "13px",
               fontWeight: 600,
               borderRadius: "25px",
@@ -210,7 +209,7 @@ const Sidebar = () => {
             <a
               href="#f"
               style={{
-                color: "#a6abc8",
+                color: "#067DD3",
                 fontWeight: "600",
               }}
             >
@@ -229,7 +228,7 @@ const Sidebar = () => {
             <a
               href="#f"
               style={{
-                color: "#a6abc8",
+                color: "#067DD3",
                 fontWeight: "600",
               }}
             >
@@ -260,7 +259,7 @@ const Sidebar = () => {
             <a
               href="#f"
               style={{
-                color: "#a6abc8",
+                color: "#067DD3",
                 fontWeight: "600",
               }}
             >
@@ -291,7 +290,7 @@ const Sidebar = () => {
             <a
               href="#f"
               style={{
-                color: "#a6abc8",
+                color: "#067DD3",
                 fontWeight: "600",
               }}
             >

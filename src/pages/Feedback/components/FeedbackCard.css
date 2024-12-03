@@ -3,7 +3,7 @@
   padding: 16px;
   border-radius: 8px;
   background-color: #f8f9fa;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .comment-header {
@@ -12,7 +12,7 @@
   align-items: center;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
-  background-color:#fcfcfc;
+  background-color: #fcfcfc;
 }
 
 .question-btn {
@@ -20,8 +20,8 @@
   border: 1px solid #ddd;
   border-radius: 20px;
   font-size: 12px;
-  color:black;
-  margin-right:5px;
+  color: black;
+  margin-right: 5px;
 }
 
 .time-ago,
@@ -43,9 +43,9 @@
 }
 
 .user-avatar {
-  width:40px;
-  height:40px;
-  border-radius:50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   margin-right: 8px;
 }
 
@@ -88,10 +88,10 @@
   padding: 4px 8px;
   border: none;
   background: #f8f9fa;
-  border:1px solid #ddd;
+  border: 1px solid #ddd;
 }
-.reply-btn{
-  color:black;
+.reply-btn {
+  color: black;
 }
 
 .unpublished-btn {
@@ -100,4 +100,12 @@
 
 .published-btn {
   color: #28a745;
+}
+
+@media (max-width: 400px) {
+  .reply-btn,
+  .unpublished-btn,
+  .published-btn {
+    font-size: 11px;
+  }
 }

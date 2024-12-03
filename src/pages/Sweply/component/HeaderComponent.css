@@ -1,4 +1,4 @@
-.nav-items-sweply{
+.nav-items-sweply {
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -6,7 +6,7 @@
 }
 
 .nav-item-sweply,
-.nav-item-home-sweply{
+.nav-item-home-sweply {
   margin: 0 5px;
 }
 .nav-icon-sweply {
@@ -14,6 +14,6 @@
   font-size: 20px;
 }
 .nav-item-home-sweply,
-.nav-icon-sweply{
-  color: #a6abc8 !important;
+.nav-icon-sweply {
+  color: var(--main-color) !important;
 }

@@ -1,4 +1,4 @@
-.nav-items-wallet{
+.nav-items-wallet {
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -6,7 +6,7 @@
 }
 
 .nav-item-wallet,
-.nav-item-home-wallet{
+.nav-item-home-wallet {
   margin: 0 5px;
 }
 .nav-icon-wallet {
@@ -14,6 +14,6 @@
   font-size: 20px;
 }
 .nav-item-home-wallet,
-.nav-icon-wallet{
-  color: #a6abc8 !important;
+.nav-icon-wallet {
+  color: var(--main-color) !important;
 }

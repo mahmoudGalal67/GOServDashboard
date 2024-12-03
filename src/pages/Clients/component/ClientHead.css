@@ -28,7 +28,7 @@
 }
 
 .btn-add-client {
-  background-color: #a6abc8 !important;
+  background-color: var(--main-color) !important;
   border-radius: 20px !important;
   color: #fff !important;
   border-color: #b2cdf4 !important;
@@ -193,7 +193,8 @@
 @media (max-width: 700px) {
   .header-container-client-head {
     display: flex;
-    justify-content: space-between !important;
+    justify-content: space-around !important;
+    margin-top: 130px;
   }
 }
 @media (max-width: 560px) {

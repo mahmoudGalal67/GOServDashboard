@@ -114,7 +114,7 @@ const DetailsModal = ({ isColumn, product, setUpdatedProduct }) => {
         onHide={handleDetailsModalClose}
         centered
         size="lg"
-        style={{ zIndex: 9999999999, maxWidth: "80%", width: "80%" }}
+        style={{ zIndex: 9999999999 }}
         className="DetailsModalClass"
       >
         <div className="modal-header">
@@ -731,7 +731,7 @@ const DetailsModal = ({ isColumn, product, setUpdatedProduct }) => {
                   </p>
                 </div>
                 <br />
-                <label
+                {/* <label
                   className="form-productDetails-label-class"
                   style={{
                     marginRight: "43px",
@@ -748,7 +748,7 @@ const DetailsModal = ({ isColumn, product, setUpdatedProduct }) => {
                   >
                     https://salla.sa/giftshop2024/netflix/p1744624860
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           )}
